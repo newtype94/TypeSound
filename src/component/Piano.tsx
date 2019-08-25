@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import "./Piano.css";
+import "../css/Piano.css";
 import { Howl } from "howler";
-import { pianoToKey } from "./keyConfig";
-import { Container, Row, Col } from "react-bootstrap";
-import useKeyPress from "./hooks/useKeyPress";
+import { pianoToKey } from "../config/keyConfig";
+import useKeyPress from "../hooks/useKeyPress";
+import { Row, Col, Form, FormControlProps } from "react-bootstrap";
+import { ReplaceProps, BsPrefixProps } from "react-bootstrap/helpers";
+import instrumentList from "../config/instrumentConfig";
 
 const Piano = () => {
-  const instrument = "acoustic_grand_piano-mp3";
-  const src = "/soundfont/MusyngKite/" + instrument + "/";
+  const [instrument, setInstrument] = useState("acoustic_grand_piano-mp3");
   const [octave, setOctave] = useState(4);
+  const src = "/soundfont/MusyngKite/" + instrument + "/";
 
   const octaveUp = useKeyPress(pianoToKey.OctaveUp);
   const octaveDown = useKeyPress(pianoToKey.OctaveDown);
@@ -19,7 +21,7 @@ const Piano = () => {
   const pressEb = useKeyPress(pianoToKey.Eb);
   const pressE = useKeyPress(pianoToKey.E);
 
-  const flexSound = {
+  const sound = {
     C: new Howl({
       src: [src + "C" + octave + ".mp3"],
       autoplay: false
@@ -53,11 +55,11 @@ const Piano = () => {
 
   useEffect(() => {
     if (pressC) {
-      flexSound.C.play();
+      sound.C.play();
       const pressed = document.getElementById("C");
       pressed!.classList.add("playing");
     } else {
-      flexSound.C.stop();
+      sound.C.stop();
       const pressed = document.getElementById("C");
       pressed!.classList.remove("playing");
     }
@@ -65,33 +67,58 @@ const Piano = () => {
 
   useEffect(() => {
     if (pressDb) {
-      flexSound.Db.play();
+      sound.Db.play();
       const pressed = document.getElementById("Db");
       pressed!.classList.add("playing");
     } else {
-      flexSound.Db.stop();
+      sound.Db.stop();
       const pressed = document.getElementById("Db");
       pressed!.classList.remove("playing");
     }
   }, [pressDb]);
 
   useEffect(() => {
-    if (pressD) flexSound.D.play();
-    else flexSound.D.stop();
+    if (pressD) sound.D.play();
+    else sound.D.stop();
   }, [pressD]);
 
   useEffect(() => {
-    if (pressEb) flexSound.Eb.play();
-    else flexSound.Eb.stop();
+    if (pressEb) sound.Eb.play();
+    else sound.Eb.stop();
   }, [pressEb]);
 
   useEffect(() => {
-    if (pressE) flexSound.E.play();
-    else flexSound.E.stop();
+    if (pressE) sound.E.play();
+    else sound.E.stop();
   }, [pressE]);
+
+  const instrumentChanged = (
+    event: React.FormEvent<
+      ReplaceProps<
+        React.ElementType<any>,
+        BsPrefixProps<React.ElementType<any>> & FormControlProps
+      >
+    >
+  ) => {
+    setInstrument(event.currentTarget.value! + "-mp3");
+  };
 
   return (
     <Row>
+      <Col xs={12}>
+        <Form.Group controlId="Instrument">
+          <Form.Label>Instrument</Form.Label>
+          <Form.Control as="select" onChange={instrumentChanged}>
+            {instrumentList.map(value => {
+              return <option>{value}</option>;
+            })}
+
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </Form.Control>
+        </Form.Group>
+      </Col>
       <Col xs={12}>
         <div className="keys">
           <div className="key" id="C">

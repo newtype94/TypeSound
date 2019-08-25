@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/bootstrap": "^4.3.1",
     "@types/howler": "^2.1.1",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.2",
+    "@types/react-bootstrap": "^0.32.19",
     "@types/react-dom": "16.9.0",
     "bootstrap": "^4.3.1",
     "howler": "^2.1.2",

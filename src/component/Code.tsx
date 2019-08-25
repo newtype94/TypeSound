@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./Code.css";
+import "../css/Code.css";
 import { Howl } from "howler";
-import { codeToKey } from "./keyConfig";
-import { Container, Row, Col, Card } from "react-bootstrap";
-import useKeyPress from "./hooks/useKeyPress";
+import { codeToKey } from "../config/keyConfig";
+import { Row, Col } from "react-bootstrap";
+import useKeyPress from "../hooks/useKeyPress";
 
 const Code = () => {
   const instrument = "acoustic_grand_piano-mp3";

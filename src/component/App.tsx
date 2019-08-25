@@ -5,12 +5,10 @@ import { Container } from "react-bootstrap";
 
 const App = () => {
   return (
-    <div>
-      <Container>
-        <Piano />
-        <Code />
-      </Container>
-    </div>
+    <Container>
+      <Piano />
+      <Code />
+    </Container>
   );
 };
 
