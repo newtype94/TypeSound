@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/Code.css";
 import { Howl } from "howler";
-import { codeToKey } from "../config/keyConfig";
+import { codeToKey, variationTokey } from "../config/keyConfig";
 import { Row, Col } from "react-bootstrap";
 import useKeyPress from "../hooks/useKeyPress";
 
@@ -11,6 +11,7 @@ const Code = () => {
   const [octave, setOctave] = useState(4);
   const [code, setCode] = useState("");
   const [variation, setVariation] = useState("");
+  const [synCode, setSynCode] = useState("");
 
   const octaveUp = useKeyPress(codeToKey.OctaveUp);
   const octaveDown = useKeyPress(codeToKey.OctaveDown);
@@ -26,6 +27,13 @@ const Code = () => {
   const pressEb = useKeyPress(codeToKey.Eb);
   const pressAb = useKeyPress(codeToKey.Ab);
   const pressBb = useKeyPress(codeToKey.Bb);
+
+  const varPlain = useKeyPress(variationTokey.plain);
+  const varM = useKeyPress(variationTokey.m);
+  const varSeven = useKeyPress(variationTokey.seven);
+  const varSusFour = useKeyPress(variationTokey.susFour);
+  const varSharp = useKeyPress(variationTokey.sharp);
+  const varDim = useKeyPress(variationTokey.dim);
 
   useEffect(() => {
     if (octaveUp && octave < 7) {

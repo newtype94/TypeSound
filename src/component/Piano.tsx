@@ -20,6 +20,9 @@ const Piano = () => {
   const pressD = useKeyPress(pianoToKey.D);
   const pressEb = useKeyPress(pianoToKey.Eb);
   const pressE = useKeyPress(pianoToKey.E);
+  const pressF = useKeyPress(pianoToKey.F);
+  const pressGb = useKeyPress(pianoToKey.Gb);
+  const pressG = useKeyPress(pianoToKey.G);
 
   const sound = {
     C: new Howl({
@@ -40,6 +43,18 @@ const Piano = () => {
     }),
     E: new Howl({
       src: [src + "E" + octave + ".mp3"],
+      autoplay: false
+    }),
+    F: new Howl({
+      src: [src + "F" + octave + ".mp3"],
+      autoplay: false
+    }),
+    Gb: new Howl({
+      src: [src + "Gb" + octave + ".mp3"],
+      autoplay: false
+    }),
+    G: new Howl({
+      src: [src + "G" + octave + ".mp3"],
       autoplay: false
     })
   };
@@ -78,19 +93,76 @@ const Piano = () => {
   }, [pressDb]);
 
   useEffect(() => {
-    if (pressD) sound.D.play();
-    else sound.D.stop();
+    if (pressD) {
+      sound.D.play();
+      const pressed = document.getElementById("D");
+      pressed!.classList.add("playing");
+    } else {
+      sound.Db.stop();
+      const pressed = document.getElementById("D");
+      pressed!.classList.remove("playing");
+    }
   }, [pressD]);
 
   useEffect(() => {
-    if (pressEb) sound.Eb.play();
-    else sound.Eb.stop();
+    if (pressEb) {
+      sound.Eb.play();
+      const pressed = document.getElementById("Eb");
+      pressed!.classList.add("playing");
+    } else {
+      sound.Eb.stop();
+      const pressed = document.getElementById("Eb");
+      pressed!.classList.remove("playing");
+    }
   }, [pressEb]);
 
   useEffect(() => {
-    if (pressE) sound.E.play();
-    else sound.E.stop();
+    if (pressE) {
+      sound.E.play();
+      const pressed = document.getElementById("E");
+      pressed!.classList.add("playing");
+    } else {
+      sound.E.stop();
+      const pressed = document.getElementById("E");
+      pressed!.classList.remove("playing");
+    }
   }, [pressE]);
+
+  useEffect(() => {
+    if (pressF) {
+      sound.F.play();
+      const pressed = document.getElementById("F");
+      pressed!.classList.add("playing");
+    } else {
+      sound.F.stop();
+      const pressed = document.getElementById("F");
+      pressed!.classList.remove("playing");
+    }
+  }, [pressF]);
+
+  useEffect(() => {
+    if (pressGb) {
+      sound.Gb.play();
+      const pressed = document.getElementById("Gb");
+      pressed!.classList.add("playing");
+    } else {
+      sound.Gb.stop();
+      const pressed = document.getElementById("Gb");
+      pressed!.classList.remove("playing");
+    }
+  }, [pressGb]);
+
+  useEffect(() => {
+    if (pressG) {
+      sound.G.play();
+      const pressed = document.getElementById("G");
+      pressed!.classList.add("playing");
+    } else {
+      sound.G.stop();
+      const pressed = document.getElementById("G");
+      pressed!.classList.remove("playing");
+    }
+  }, [pressG]);
 
   const instrumentChanged = (
     event: React.FormEvent<

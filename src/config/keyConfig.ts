@@ -1,14 +1,17 @@
-enum pianoToKey {
+export enum pianoToKey {
   OctaveUp = "Enter",
   OctaveDown = "Backspace",
   C = "y",
   Db = "7",
   D = "u",
   Eb = "8",
-  E = "i"
+  E = "i",
+  F = "o",
+  Gb = "0",
+  G = "p"
 }
 
-enum codeToKey {
+export enum codeToKey {
   OctaveUp = "Tab",
   OctaveDown = "Leftshift",
   C = "q",
@@ -24,7 +27,7 @@ enum codeToKey {
   Bb = "v"
 }
 
-enum variationTokey {
+export enum variationTokey {
   plain = "1",
   m = "2",
   seven = "3",
@@ -33,4 +36,11 @@ enum variationTokey {
   dim = "6"
 }
 
-export { pianoToKey, codeToKey, variationTokey };
+export interface codeType {
+  plain: boolean;
+  m: boolean;
+  seven: boolean;
+  susFour: boolean;
+  sharp: boolean;
+  dim: boolean;
+}
