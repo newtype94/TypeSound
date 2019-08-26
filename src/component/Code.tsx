@@ -4,36 +4,54 @@ import { Howl } from "howler";
 import { codeToKey, variationTokey } from "../config/keyConfig";
 import { Row, Col } from "react-bootstrap";
 import useKeyPress from "../hooks/useKeyPress";
+import {
+  variationEnum,
+  codeVariationEnum,
+  codeEnum,
+  variationArray,
+  codeArray,
+  getCodeVariation
+} from "../config/codeConfig";
 
-const Code = () => {
-  const instrument = "acoustic_grand_piano-mp3";
+const Code = ({ instrument = "acoustic_grand_piano-mp3" }) => {
   const src = "/soundfont/MusyngKite/" + instrument + "/";
   const [octave, setOctave] = useState(4);
-  const [code, setCode] = useState("");
-  const [variation, setVariation] = useState("");
-  const [synCode, setSynCode] = useState("");
+  const [code, setCode] = useState(codeEnum.C);
+  const [variation, setVariation] = useState(variationEnum.plain);
+  const [codeVariation, setCodeVariation] = useState(codeVariationEnum.Cplain);
 
   const octaveUp = useKeyPress(codeToKey.OctaveUp);
   const octaveDown = useKeyPress(codeToKey.OctaveDown);
 
-  const pressC = useKeyPress(codeToKey.C);
-  const pressD = useKeyPress(codeToKey.D);
-  const pressE = useKeyPress(codeToKey.E);
-  const pressF = useKeyPress(codeToKey.F);
-  const pressG = useKeyPress(codeToKey.G);
-  const pressA = useKeyPress(codeToKey.A);
-  const pressB = useKeyPress(codeToKey.B);
-  const pressDb = useKeyPress(codeToKey.Db);
-  const pressEb = useKeyPress(codeToKey.Eb);
-  const pressAb = useKeyPress(codeToKey.Ab);
-  const pressBb = useKeyPress(codeToKey.Bb);
+  const codeHooks = [
+    useKeyPress(codeToKey.C),
+    useKeyPress(codeToKey.D),
+    useKeyPress(codeToKey.E),
+    useKeyPress(codeToKey.F),
+    useKeyPress(codeToKey.G),
+    useKeyPress(codeToKey.A),
+    useKeyPress(codeToKey.B),
+    useKeyPress(codeToKey.Db),
+    useKeyPress(codeToKey.Eb),
+    useKeyPress(codeToKey.Ab),
+    useKeyPress(codeToKey.Bb)
+  ];
 
-  const varPlain = useKeyPress(variationTokey.plain);
-  const varM = useKeyPress(variationTokey.m);
-  const varSeven = useKeyPress(variationTokey.seven);
-  const varSusFour = useKeyPress(variationTokey.susFour);
-  const varSharp = useKeyPress(variationTokey.sharp);
-  const varDim = useKeyPress(variationTokey.dim);
+  const variationHooks = [
+    useKeyPress(variationTokey.plain),
+    useKeyPress(variationTokey.m),
+    useKeyPress(variationTokey.seven),
+    useKeyPress(variationTokey.susfour),
+    useKeyPress(variationTokey.sharp),
+    useKeyPress(variationTokey.dim)
+  ];
+
+  const makeCodeVariation = () => {
+    setCodeVariation(
+      getCodeVariation[code][variation] ||
+        getCodeVariation[code][variationEnum.plain]
+    );
+  };
 
   useEffect(() => {
     if (octaveUp && octave < 7) {
@@ -45,16 +63,22 @@ const Code = () => {
   }, [octaveUp, octaveDown]);
 
   useEffect(() => {
-    if (pressC) {
-      setCode("C");
+    for (let i in codeArray) {
+      if (codeHooks[i]) {
+        setCode(codeArray[i]);
+        makeCodeVariation();
+      }
     }
-  }, [pressC]);
+  }, [codeHooks]);
 
   useEffect(() => {
-    if (pressD) {
-      setCode("D");
+    for (let i in variationArray) {
+      if (variationHooks[i]) {
+        setVariation(variationArray[i]);
+        makeCodeVariation();
+      }
     }
-  }, [pressD]);
+  }, [variationHooks]);
 
   return (
     <Row>
@@ -62,10 +86,10 @@ const Code = () => {
         octave : {octave}
       </Col>
       <Col xs={4} className="octave">
-        code : {code}
+        {codeVariation}
       </Col>
       <Col xs={4} className="octave">
-        variaton : {variation}
+        {code}+{variation}
       </Col>
     </Row>
   );

@@ -7,8 +7,7 @@ import { Row, Col, Form, FormControlProps } from "react-bootstrap";
 import { ReplaceProps, BsPrefixProps } from "react-bootstrap/helpers";
 import instrumentList from "../config/instrumentConfig";
 
-const Piano = () => {
-  const [instrument, setInstrument] = useState("acoustic_grand_piano-mp3");
+const Piano = ({ instrument = "acoustic_grand_piano-mp3" }) => {
   const [octave, setOctave] = useState(4);
   const src = "/soundfont/MusyngKite/" + instrument + "/";
 
@@ -164,33 +163,8 @@ const Piano = () => {
     }
   }, [pressG]);
 
-  const instrumentChanged = (
-    event: React.FormEvent<
-      ReplaceProps<
-        React.ElementType<any>,
-        BsPrefixProps<React.ElementType<any>> & FormControlProps
-      >
-    >
-  ) => {
-    setInstrument(event.currentTarget.value! + "-mp3");
-  };
-
   return (
     <Row>
-      <Col xs={12}>
-        <Form.Group controlId="Instrument">
-          <Form.Label>Instrument</Form.Label>
-          <Form.Control as="select" onChange={instrumentChanged}>
-            {instrumentList.map(value => {
-              return <option>{value}</option>;
-            })}
-
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </Form.Control>
-        </Form.Group>
-      </Col>
       <Col xs={12}>
         <div className="keys">
           <div className="key" id="C">

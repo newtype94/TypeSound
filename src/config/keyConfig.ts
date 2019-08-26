@@ -12,8 +12,8 @@ export enum pianoToKey {
 }
 
 export enum codeToKey {
-  OctaveUp = "Tab",
-  OctaveDown = "Leftshift",
+  OctaveUp = "t",
+  OctaveDown = "r",
   C = "q",
   D = "w",
   E = "e",
@@ -31,7 +31,7 @@ export enum variationTokey {
   plain = "1",
   m = "2",
   seven = "3",
-  susFour = "4",
+  susfour = "4",
   sharp = "5",
   dim = "6"
 }
