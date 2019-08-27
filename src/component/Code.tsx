@@ -1,40 +1,43 @@
 import React, { useEffect, useState } from "react";
-import "../css/Code.css";
+import "../css/Chord.css";
 import { Howl } from "howler";
-import { codeToKey, variationTokey } from "../config/toKeyConfig";
+import { chordToKey, variationTokey } from "../config/toKeyConfig";
 import { Row, Col } from "react-bootstrap";
 import useKeyPress from "../hooks/useKeyPress";
 import {
   variationEnum,
-  codeVariationEnum,
-  codeEnum,
-  variationArray,
-  codeArray,
-  getCodeVariation
-} from "../config/codeConfig";
+  chordVariationEnum,
+  chordEnum,
+  chordArray,
+  variationArray
+} from "../config/chordConfig";
+import { chordMake } from "music-chord";
+import { chordGet } from "chord-symbol";
 
-const Code = ({ instrument = "acoustic_grand_piano-mp3" }) => {
+const Chord = ({ instrument = "acoustic_grand_piano-mp3" }) => {
   const src = "/soundfont/MusyngKite/" + instrument + "/";
   const [octave, setOctave] = useState(4);
-  const [code, setCode] = useState(codeEnum.C);
-  const [variation, setVariation] = useState(variationEnum.plain);
-  const [codeVariation, setCodeVariation] = useState(codeVariationEnum.Cplain);
+  const [chord, setChord] = useState(chordEnum.C);
+  const [variation, setVariation] = useState(variationEnum.Major);
+  const [chordVariation, setChordVariation] = useState("insert Code");
+  console.log(JSON.stringify(chordGet(chord, variation)));
+  console.log(chordMake(variation, chord));
 
-  const octaveUp = useKeyPress(codeToKey.OctaveUp);
-  const octaveDown = useKeyPress(codeToKey.OctaveDown);
+  const octaveUp = useKeyPress(chordToKey.OctaveUp);
+  const octaveDown = useKeyPress(chordToKey.OctaveDown);
 
-  const codeHooks = [
-    useKeyPress(codeToKey.C),
-    useKeyPress(codeToKey.D),
-    useKeyPress(codeToKey.E),
-    useKeyPress(codeToKey.F),
-    useKeyPress(codeToKey.G),
-    useKeyPress(codeToKey.A),
-    useKeyPress(codeToKey.B),
-    useKeyPress(codeToKey.Db),
-    useKeyPress(codeToKey.Eb),
-    useKeyPress(codeToKey.Ab),
-    useKeyPress(codeToKey.Bb)
+  const chordHooks = [
+    useKeyPress(chordToKey.C),
+    useKeyPress(chordToKey.D),
+    useKeyPress(chordToKey.E),
+    useKeyPress(chordToKey.F),
+    useKeyPress(chordToKey.G),
+    useKeyPress(chordToKey.A),
+    useKeyPress(chordToKey.B),
+    useKeyPress(chordToKey.Db),
+    useKeyPress(chordToKey.Eb),
+    useKeyPress(chordToKey.Ab),
+    useKeyPress(chordToKey.Bb)
   ];
 
   const variationHooks = [
@@ -46,12 +49,7 @@ const Code = ({ instrument = "acoustic_grand_piano-mp3" }) => {
     useKeyPress(variationTokey.dim)
   ];
 
-  const makeCodeVariation = () => {
-    setCodeVariation(
-      getCodeVariation[code][variation] ||
-        getCodeVariation[code][variationEnum.plain]
-    );
-  };
+  const makechordVariation = () => {};
 
   useEffect(() => {
     if (octaveUp && octave < 7) {
@@ -63,19 +61,17 @@ const Code = ({ instrument = "acoustic_grand_piano-mp3" }) => {
   }, [octaveUp, octaveDown]);
 
   useEffect(() => {
-    for (let i in codeArray) {
-      if (codeHooks[i]) {
-        setCode(codeArray[i]);
-        makeCodeVariation();
+    for (let i = 0; i < chordHooks.length; i++) {
+      if (chordHooks[i]) {
+        setChord(chordArray[i]);
       }
     }
-  }, [codeHooks]);
+  }, [chordHooks]);
 
   useEffect(() => {
-    for (let i in variationArray) {
+    for (let i = 0; i < variationHooks.length; i++) {
       if (variationHooks[i]) {
         setVariation(variationArray[i]);
-        makeCodeVariation();
       }
     }
   }, [variationHooks]);
@@ -86,13 +82,13 @@ const Code = ({ instrument = "acoustic_grand_piano-mp3" }) => {
         octave : {octave}
       </Col>
       <Col xs={4} className="octave">
-        {codeVariation}
+        {chordVariation}
       </Col>
       <Col xs={4} className="octave">
-        {code}+{variation}
+        {chord}+{variation}
       </Col>
     </Row>
   );
 };
 
-export default Code;
+export default Chord;

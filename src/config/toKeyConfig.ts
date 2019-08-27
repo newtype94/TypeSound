@@ -11,7 +11,7 @@ export enum pianoToKey {
   G = "p"
 }
 
-export enum codeToKey {
+export enum chordToKey {
   OctaveUp = "t",
   OctaveDown = "r",
   C = "q",
