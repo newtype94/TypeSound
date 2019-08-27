@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/Code.css";
 import { Howl } from "howler";
-import { codeToKey, variationTokey } from "../config/keyConfig";
+import { codeToKey, variationTokey } from "../config/toKeyConfig";
 import { Row, Col } from "react-bootstrap";
 import useKeyPress from "../hooks/useKeyPress";
 import {

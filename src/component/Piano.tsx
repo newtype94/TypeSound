@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../css/Piano.css";
 import { Howl } from "howler";
-import { pianoToKey } from "../config/keyConfig";
+import { pianoToKey } from "../config/toKeyConfig";
 import useKeyPress from "../hooks/useKeyPress";
 import { Row, Col, Form, FormControlProps } from "react-bootstrap";
-import { ReplaceProps, BsPrefixProps } from "react-bootstrap/helpers";
-import instrumentList from "../config/instrumentConfig";
 
 const Piano = ({ instrument = "acoustic_grand_piano-mp3" }) => {
   const [octave, setOctave] = useState(4);

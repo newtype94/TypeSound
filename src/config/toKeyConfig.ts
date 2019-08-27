@@ -35,12 +35,3 @@ export enum variationTokey {
   sharp = "5",
   dim = "6"
 }
-
-export interface codeType {
-  plain: boolean;
-  m: boolean;
-  seven: boolean;
-  susFour: boolean;
-  sharp: boolean;
-  dim: boolean;
-}
