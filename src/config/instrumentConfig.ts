@@ -1,4 +1,4 @@
-const instrumentList = [
+const FSinstrumentList = [
   "acoustic_grand_piano",
   "acoustic_guitar_nylon",
   "acoustic_guitar_steel",
@@ -129,4 +129,4 @@ const instrumentList = [
   "xylophone"
 ];
 
-export default instrumentList;
+export default FSinstrumentList;

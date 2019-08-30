@@ -8,7 +8,6 @@ function useKeyPress(targetKey: string) {
   // If pressed key is our target key then set to true
   function downHandler(event: KeyboardEvent) {
     if (event.key === targetKey) {
-      console.log("cike");
       setKeyPressed(true);
     }
   }

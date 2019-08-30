@@ -1,6 +1,4 @@
-export enum pianoToKey {
-  OctaveUp = "Enter",
-  OctaveDown = "Backspace",
+export enum FSpianoToKey {
   C = "y",
   Db = "7",
   D = "u",
@@ -8,30 +6,42 @@ export enum pianoToKey {
   E = "i",
   F = "o",
   Gb = "0",
-  G = "p"
+  G = "p",
+  Ab = "-",
+  A = "[",
+  Bb = "=",
+  B = "]",
+  OctaveDown = "Backspace",
+  OctaveUp = "Enter"
 }
 
-export enum chordToKey {
-  OctaveUp = "t",
-  OctaveDown = "r",
-  C = "q",
-  D = "w",
-  E = "e",
-  F = "a",
-  G = "s",
-  A = "d",
-  B = "f",
-  Db = "z",
-  Eb = "x",
-  Ab = "c",
-  Bb = "v"
+export enum FSchordToKey {
+  C = "z",
+  Db = "s",
+  D = "x",
+  Eb = "d",
+  E = "c",
+  F = "v",
+  Gb = "g",
+  G = "b",
+  Ab = "h",
+  A = "n",
+  Bb = "j",
+  B = "m",
+  OctaveDown = ",",
+  OctaveUp = "."
 }
 
-export enum variationTokey {
-  plain = "1",
+export enum FSvariationTokey {
+  Major = "1",
   m = "2",
-  seven = "3",
+  sustwo = "3",
   susfour = "4",
-  sharp = "5",
-  dim = "6"
+  dim = "5",
+  aug = "6",
+  two = "q",
+  six = "w",
+  seven = "e",
+  msix = "r",
+  mseven = "t"
 }

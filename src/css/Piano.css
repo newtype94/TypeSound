@@ -11,7 +11,6 @@ html {
   height: 350px;
   max-width: 880px;
   position: relative;
-  margin: 40px auto 0;
   cursor: none;
 }
 
@@ -78,6 +77,6 @@ html {
 }
 
 .octave {
-  color: #a8200e;
-  font-size: 20px;
+  color: white;
+  font-size: 40px;
 }

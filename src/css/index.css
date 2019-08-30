@@ -1,0 +1,28 @@
+html {
+  background: rgb(36, 33, 33);
+  font-family: "Noto Serif", serif;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+}
+
+body {
+  background: rgb(36, 33, 33);
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 600px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 720px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 900px;
+  }
+}
