@@ -9,16 +9,22 @@ import {
   FSvariationEnum,
   FSchordEnum,
   FSchordArray,
-  FSvariationArray
+  FSvariationArray,
+  FSpatterEnum,
+  FSchordVariationEnum
 } from "../config/chordConfig";
+import { FSfullKeyEnum } from "../config/pianoConfig";
+import { chordNotes } from "./../lib/chordNotes";
 
 const Chord = ({ instrument = "acoustic_grand_piano-mp3" }) => {
   const src = "/soundfont/MusyngKite/" + instrument + "/";
   const [octave, setOctave] = useState(4);
-  const [chord, setChord] = useState<FSchordEnum | undefined>(FSchordEnum.C);
+  const [chord, setChord] = useState<FSchordEnum>(FSchordEnum.C);
   const [variation, setVariation] = useState<FSvariationEnum>(
     FSvariationEnum.Major
   );
+  const [note, setNote] = useState<FSfullKeyEnum[]>();
+  const [pattern, setPattern] = useState<FSpatterEnum>(FSpatterEnum.parallel);
 
   const octaveUp = useKeyPress(FSchordToKey.OctaveUp);
   const octaveDown = useKeyPress(FSchordToKey.OctaveDown);
@@ -41,15 +47,15 @@ const Chord = ({ instrument = "acoustic_grand_piano-mp3" }) => {
   const variationHooks = [
     useKeyPress(FSvariationTokey.Major),
     useKeyPress(FSvariationTokey.m),
-    useKeyPress(FSvariationTokey.sustwo),
-    useKeyPress(FSvariationTokey.susfour),
-    useKeyPress(FSvariationTokey.dim),
+    useKeyPress(FSvariationTokey.msix),
+    useKeyPress(FSvariationTokey.mseven),
     useKeyPress(FSvariationTokey.aug),
+    useKeyPress(FSvariationTokey.dim),
     useKeyPress(FSvariationTokey.two),
     useKeyPress(FSvariationTokey.six),
     useKeyPress(FSvariationTokey.seven),
-    useKeyPress(FSvariationTokey.msix),
-    useKeyPress(FSvariationTokey.mseven)
+    useKeyPress(FSvariationTokey.sustwo),
+    useKeyPress(FSvariationTokey.susfour)
   ];
 
   useEffect(() => {
@@ -73,10 +79,14 @@ const Chord = ({ instrument = "acoustic_grand_piano-mp3" }) => {
     for (let i = 0; i < variationHooks.length; i++) {
       if (variationHooks[i]) {
         setVariation(FSvariationArray[i]);
-        setChord(undefined);
       }
     }
   }, [variationHooks]);
+
+  useEffect(() => {
+    const abb = chord + variation;
+    console.log(chordNotes[abb]);
+  }, [chord]);
 
   return (
     <Row className="mt-4">
@@ -89,7 +99,7 @@ const Chord = ({ instrument = "acoustic_grand_piano-mp3" }) => {
         </div>
       </Col>
       <Col xs={6}>
-        <div className="box"></div>
+        <div className="box">{pattern}</div>
       </Col>
     </Row>
   );

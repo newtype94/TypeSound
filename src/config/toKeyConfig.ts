@@ -35,13 +35,13 @@ export enum FSchordToKey {
 export enum FSvariationTokey {
   Major = "1",
   m = "2",
-  sustwo = "3",
-  susfour = "4",
-  dim = "5",
-  aug = "6",
+  msix = "3",
+  mseven = "4",
+  aug = "5",
+  dim = "6",
   two = "q",
   six = "w",
   seven = "e",
-  msix = "r",
-  mseven = "t"
+  sustwo = "r",
+  susfour = "t"
 }
