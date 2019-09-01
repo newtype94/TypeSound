@@ -3,15 +3,35 @@ import { FSchordEnum, FSchordVariationEnum } from "../config/chordConfig";
 export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   // C
   [FSchordVariationEnum.CMajor]: [
-    [],
     [FSchordEnum.C, FSchordEnum.E, FSchordEnum.G],
+    [],
     []
   ],
-  [FSchordVariationEnum.Cm]: [[], [], []],
-  [FSchordVariationEnum.C6]: [[], [], []],
-  [FSchordVariationEnum.Cm7]: [[], [], []],
-  [FSchordVariationEnum.Caug]: [[], [], []],
-  [FSchordVariationEnum.Cdim]: [[], [], []],
+  [FSchordVariationEnum.Cm]: [
+    [FSchordEnum.C, FSchordEnum.Eb, FSchordEnum.G, FSchordEnum.Bb],
+    [],
+    []
+  ],
+  [FSchordVariationEnum.Cm6]: [
+    [FSchordEnum.C, FSchordEnum.Eb, FSchordEnum.G, FSchordEnum.A],
+    [],
+    []
+  ],
+  [FSchordVariationEnum.Cm7]: [
+    [FSchordEnum.C, FSchordEnum.Eb, FSchordEnum.G, FSchordEnum.Bb],
+    [],
+    []
+  ],
+  [FSchordVariationEnum.Caug]: [
+    [FSchordEnum.C, FSchordEnum.E, FSchordEnum.Ab],
+    [],
+    []
+  ],
+  [FSchordVariationEnum.Cdim]: [
+    [FSchordEnum.C, FSchordEnum.Eb, FSchordEnum.Gb],
+    [],
+    []
+  ],
   [FSchordVariationEnum.C2]: [[], [], []],
   [FSchordVariationEnum.C6]: [[], [], []],
   [FSchordVariationEnum.C7]: [[], [], []],
@@ -67,9 +87,9 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.Esus4]: [[], [], []],
   // F
   [FSchordVariationEnum.FMajor]: [
-    [],
     [FSchordEnum.F, FSchordEnum.A],
-    [FSchordEnum.C]
+    [FSchordEnum.C],
+    []
   ],
   [FSchordVariationEnum.Fm]: [[], [], []],
   [FSchordVariationEnum.Fm6]: [[], [], []],
@@ -141,7 +161,6 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.Bb7]: [[], [], []],
   [FSchordVariationEnum.Bbsus2]: [[], [], []],
   [FSchordVariationEnum.Bbsus4]: [[], [], []],
-
   // B
   [FSchordVariationEnum.BMajor]: [[], [], []],
   [FSchordVariationEnum.Bm]: [[], [], []],
