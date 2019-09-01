@@ -15,6 +15,7 @@ import {
 } from "../config/chordConfig";
 import { FSfullKeyEnum } from "../config/pianoConfig";
 import { chordNotes } from "./../lib/chordNotes";
+import ChordPlaying from "./ChordPlaying";
 
 const Chord = ({ instrument = "acoustic_grand_piano-mp3" }) => {
   const src = "/soundfont/MusyngKite/" + instrument + "/";
@@ -101,6 +102,11 @@ const Chord = ({ instrument = "acoustic_grand_piano-mp3" }) => {
       <Col xs={6}>
         <div className="box">{pattern}</div>
       </Col>
+      <ChordPlaying
+        instrument={instrument}
+        octave={octave}
+        C={useKeyPress(FSchordToKey.C)}
+      ></ChordPlaying>
     </Row>
   );
 };
