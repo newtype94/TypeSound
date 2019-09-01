@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import Piano from "./Piano";
 import Chord from "./Chord";
 import { Container, Col, Row, Form, FormControlProps } from "react-bootstrap";
-import instrumentList from "../config/instrumentConfig";
+import { FSinstrumentList, FSinstrumentEnum } from "../config/instrumentConfig";
 import { ReplaceProps, BsPrefixProps } from "react-bootstrap/helpers";
 
 const App = () => {
-  const [chordInst, setChordInst] = useState("acoustic_grand_piano-mp3");
-  const [pianoInst, setPianoInst] = useState("acoustic_grand_piano-mp3");
+  const [chordInst, setChordInst] = useState<string>(
+    FSinstrumentEnum.acoustic_grand_piano
+  );
+  const [pianoInst, setPianoInst] = useState<string>(
+    FSinstrumentEnum.acoustic_grand_piano
+  );
   const instrumentChanged = (
     event: React.FormEvent<
       ReplaceProps<
@@ -17,9 +21,9 @@ const App = () => {
     >
   ) => {
     if (event.currentTarget.id === "chordInst")
-      setChordInst(event.currentTarget.value! + "-mp3");
+      setChordInst(event.currentTarget.value!);
     if (event.currentTarget.id === "pianoInst") {
-      setPianoInst(event.currentTarget.value! + "-mp3");
+      setPianoInst(event.currentTarget.value!);
     }
   };
   return (
@@ -29,13 +33,13 @@ const App = () => {
           <Form.Group controlId="Instrument">
             <Row>
               <Col>
-                <Form.Label className="text-white">Code Instrument</Form.Label>
+                <Form.Label className="text-white">Chord Instrument</Form.Label>
                 <Form.Control
                   as="select"
                   onChange={instrumentChanged}
                   id="chordInst"
                 >
-                  {instrumentList.map(value => {
+                  {FSinstrumentList.map(value => {
                     return <option>{value}</option>;
                   })}
                 </Form.Control>
@@ -47,7 +51,7 @@ const App = () => {
                   onChange={instrumentChanged}
                   id="pianoInst"
                 >
-                  {instrumentList.map(value => {
+                  {FSinstrumentList.map(value => {
                     return <option>{value}</option>;
                   })}
                 </Form.Control>

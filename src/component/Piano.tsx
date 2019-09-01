@@ -6,10 +6,13 @@ import { FSpianoToKey } from "../config/toKeyConfig";
 import useKeyPress from "../hooks/useKeyPress";
 import { Row, Col } from "react-bootstrap";
 import { FSchordArray } from "../config/chordConfig";
+import { FSinstrumentEnum } from "../config/instrumentConfig";
 
-const Piano = ({ instrument = "acoustic_grand_piano-mp3" }) => {
+const inst: string = FSinstrumentEnum.acoustic_grand_piano;
+
+const Piano = ({ instrument = inst }) => {
   const [octave, setOctave] = useState(4);
-  const src = "/soundfont/MusyngKite/" + instrument + "/";
+  const src = "/soundfont/MusyngKite/" + instrument + "-mp3/";
 
   const octaveUp = useKeyPress(FSpianoToKey.OctaveUp);
   const octaveDown = useKeyPress(FSpianoToKey.OctaveDown);

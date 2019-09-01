@@ -1,42 +1,91 @@
 import React, { useEffect, useState } from "react";
 
-import { Howl } from "howler";
-import { FSchordArray } from "../config/chordConfig";
+import "../css/Chord.css";
+import { FSchordToKey } from "../config/toKeyConfig";
+import { Row, Col } from "react-bootstrap";
+import useKeyPress from "../hooks/useKeyPress";
+import {
+  FSvariationEnum,
+  FSchordEnum,
+  FSpatterEnum
+} from "../config/chordConfig";
+import { getNote } from "../utils/getNote";
+import { FSinstrumentEnum } from "../config/instrumentConfig";
+import ChordSound from "./ChordSound";
+
+const inst: string = FSinstrumentEnum.acoustic_grand_piano;
 
 const ChordPlaying = ({
-  instrument = "acoustic_grand_piano-mp3",
-  pressed = [""]
+  instrument = inst,
+  octave = 4,
+  variation = FSvariationEnum.Major,
+  pattern = FSpatterEnum.parallel
 }) => {
-  const src = "/soundfont/MusyngKite/" + instrument + "/";
+  const [chord, setChord] = useState<FSchordEnum>(FSchordEnum.C);
 
-  //Create Sound Model
-  let sound: { [key: string]: Howl } = {};
-  FSchordArray.forEach(value => {
-    for (let octave = 0; octave < 8; octave++) {
-      sound[value + octave] = new Howl({
-        src: [src + value + octave + ".mp3"],
-        autoplay: false
-      });
+  const [note, setNote] = useState<string[]>(["C4", "E4", "G4"]);
+
+  const [played, setPlayed] = useState<string[]>([]);
+  const [playing, setPlaying] = useState<string[]>(["C4", "E4", "G4"]);
+
+  const pressC = useKeyPress(FSchordToKey.C);
+  const pressDb = useKeyPress(FSchordToKey.Db);
+  const pressF = useKeyPress(FSchordToKey.F);
+
+  useEffect(() => {
+    if (!pressC) {
+      // Key Off
+      setPlaying([]);
+    } else if (pressC && chord === FSchordEnum.C) {
+      // Key Re-On
+      setPlaying(note);
+    } else {
+      // Key First-On
+      setChord(FSchordEnum.C);
+      const gotNote = getNote(FSchordEnum.C + variation, octave);
+      setNote(gotNote);
+      setPlaying(gotNote);
+      setPlayed(gotNote);
     }
-  });
-
-  const [playing, setPlaying] = useState<string[]>([]);
+  }, [pressC]);
 
   useEffect(() => {
-    //stop which is now-playing
-    playing.forEach(value => {
-      sound[value].stop();
-    });
-    setPlaying(pressed);
-  }, [pressed]);
+    if (!pressF) {
+      // Key Off
+      setPlaying([]);
+    } else if (pressF && chord === FSchordEnum.F) {
+      // Key Re-On
+      setPlaying(note);
+    } else {
+      // Key First-On
+      setChord(FSchordEnum.F);
+      const gotNote = getNote(FSchordEnum.F + variation, octave);
+      setNote(gotNote);
+      setPlaying(gotNote);
+      setPlayed(gotNote);
+    }
+  }, [pressF]);
 
-  useEffect(() => {
-    playing.forEach(value => {
-      sound[value].play();
-    });
-  }, [playing]);
-
-  return <div></div>;
+  return (
+    <Row className="mt-4">
+      <Col xs={6}>
+        <div className="box">
+          {octave}&nbsp;Octave
+          <br />
+          {chord}&nbsp;
+          {variation}
+        </div>
+      </Col>
+      <Col xs={6}>
+        <div className="box">{pattern}</div>
+      </Col>
+      <ChordSound
+        instrument={instrument}
+        played={played}
+        playing={playing}
+      ></ChordSound>
+    </Row>
+  );
 };
 
 export default ChordPlaying;
