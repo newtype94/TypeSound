@@ -54,6 +54,11 @@ export const getDesNote = (
   chordNotes[chordVariatioin][2].map(value => {
     notesTemp.push(value + String(octave + 2));
   });
+  const notesResult = notesTemp.reverse();
+  for (let i = notesTemp.length - 2; i > 0; i--) {
+    notesResult.push(notesTemp[i]);
+  }
+
   console.log(notesTemp);
   return notesTemp;
 };

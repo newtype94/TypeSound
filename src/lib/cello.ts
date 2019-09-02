@@ -1,13 +1,8 @@
-import React, { useEffect } from "react";
-
-import { Howl } from "howler";
-import { FSinstrumentEnum } from "../config/instrumentConfig";
-
-const inst: string = FSinstrumentEnum.acoustic_grand_piano;
-const src = "/soundfont/MusyngKite/" + inst + "-mp3/";
+import { Howl, Howler } from "howler";
+const src = "/soundfont/MusyngKite/cello-mp3/";
 
 //Create Sound Model
-const sound: { [key: string]: Howl } = {
+export const celloSound: { [key: string]: Howl } = {
   C0: new Howl({
     src: [src + "C0.mp3"]
   }),
@@ -18,7 +13,7 @@ const sound: { [key: string]: Howl } = {
     src: [src + "D0.mp3"]
   }),
   Eb0: new Howl({
-    src: [src + "E0.mp3"]
+    src: [src + "Eb0.mp3"]
   }),
   E0: new Howl({
     src: [src + "E0.mp3"]
@@ -39,7 +34,7 @@ const sound: { [key: string]: Howl } = {
     src: [src + "A0.mp3"]
   }),
   Bb0: new Howl({
-    src: [src + "Bb.mp3"]
+    src: [src + "Bb0.mp3"]
   }),
   B0: new Howl({
     src: [src + "B0.mp3"]
@@ -54,7 +49,7 @@ const sound: { [key: string]: Howl } = {
     src: [src + "D1.mp3"]
   }),
   Eb1: new Howl({
-    src: [src + "E1.mp3"]
+    src: [src + "Eb1.mp3"]
   }),
   E1: new Howl({
     src: [src + "E1.mp3"]
@@ -74,6 +69,12 @@ const sound: { [key: string]: Howl } = {
   A1: new Howl({
     src: [src + "A1.mp3"]
   }),
+  Bb1: new Howl({
+    src: [src + "Bb1.mp3"]
+  }),
+  B1: new Howl({
+    src: [src + "B1.mp3"]
+  }),
   C2: new Howl({
     src: [src + "C2.mp3"]
   }),
@@ -84,7 +85,7 @@ const sound: { [key: string]: Howl } = {
     src: [src + "D2.mp3"]
   }),
   Eb2: new Howl({
-    src: [src + "E2.mp3"]
+    src: [src + "Eb2.mp3"]
   }),
   E2: new Howl({
     src: [src + "E2.mp3"]
@@ -104,6 +105,7 @@ const sound: { [key: string]: Howl } = {
   A2: new Howl({
     src: [src + "A2.mp3"]
   }),
+
   Bb2: new Howl({
     src: [src + "Bb2.mp3"]
   }),
@@ -120,7 +122,7 @@ const sound: { [key: string]: Howl } = {
     src: [src + "D3.mp3"]
   }),
   Eb3: new Howl({
-    src: [src + "E3.mp3"]
+    src: [src + "Eb3.mp3"]
   }),
   E3: new Howl({
     src: [src + "E3.mp3"]
@@ -156,7 +158,7 @@ const sound: { [key: string]: Howl } = {
     src: [src + "D4.mp3"]
   }),
   Eb4: new Howl({
-    src: [src + "E4.mp3"]
+    src: [src + "Eb4.mp3"]
   }),
   E4: new Howl({
     src: [src + "E4.mp3"]
@@ -192,7 +194,7 @@ const sound: { [key: string]: Howl } = {
     src: [src + "D5.mp3"]
   }),
   Eb5: new Howl({
-    src: [src + "E5.mp3"]
+    src: [src + "Eb5.mp3"]
   }),
   E5: new Howl({
     src: [src + "E5.mp3"]
@@ -228,7 +230,7 @@ const sound: { [key: string]: Howl } = {
     src: [src + "D6.mp3"]
   }),
   Eb6: new Howl({
-    src: [src + "E6.mp3"]
+    src: [src + "Eb6.mp3"]
   }),
   E6: new Howl({
     src: [src + "E6.mp3"]
@@ -248,6 +250,12 @@ const sound: { [key: string]: Howl } = {
   A6: new Howl({
     src: [src + "A6.mp3"]
   }),
+  Bb6: new Howl({
+    src: [src + "Bb6.mp3"]
+  }),
+  B6: new Howl({
+    src: [src + "B6.mp3"]
+  }),
   C7: new Howl({
     src: [src + "C7.mp3"]
   }),
@@ -258,7 +266,7 @@ const sound: { [key: string]: Howl } = {
     src: [src + "D7.mp3"]
   }),
   Eb7: new Howl({
-    src: [src + "E7.mp3"]
+    src: [src + "Eb7.mp3"]
   }),
   E7: new Howl({
     src: [src + "E7.mp3"]
@@ -278,6 +286,12 @@ const sound: { [key: string]: Howl } = {
   A7: new Howl({
     src: [src + "A7.mp3"]
   }),
+  Bb7: new Howl({
+    src: [src + "Bb7.mp3"]
+  }),
+  B7: new Howl({
+    src: [src + "B7.mp3"]
+  }),
   C8: new Howl({
     src: [src + "C8.mp3"]
   }),
@@ -288,7 +302,7 @@ const sound: { [key: string]: Howl } = {
     src: [src + "D8.mp3"]
   }),
   Eb8: new Howl({
-    src: [src + "E8.mp3"]
+    src: [src + "Eb8.mp3"]
   }),
   E8: new Howl({
     src: [src + "E8.mp3"]
@@ -307,23 +321,11 @@ const sound: { [key: string]: Howl } = {
   }),
   A8: new Howl({
     src: [src + "A8.mp3"]
+  }),
+  Bb8: new Howl({
+    src: [src + "Bb8.mp3"]
+  }),
+  B8: new Howl({
+    src: [src + "B28.mp3"]
   })
 };
-
-const ChordSound = ({ instrument = inst, played = [""], playing = [""] }) => {
-  useEffect(() => {
-    if (playing.length === 0) {
-      played.forEach(value => {
-        sound[value].stop();
-      });
-    } else {
-      playing.forEach(value => {
-        sound[value].play();
-      });
-    }
-  }, [playing]);
-
-  return <div></div>;
-};
-
-export default ChordSound;

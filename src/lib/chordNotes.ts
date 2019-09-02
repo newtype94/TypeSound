@@ -8,7 +8,7 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
     []
   ],
   [FSchordVariationEnum.Cm]: [
-    [FSchordEnum.C, FSchordEnum.Eb, FSchordEnum.G, FSchordEnum.Bb],
+    [FSchordEnum.C, FSchordEnum.Eb, FSchordEnum.G],
     [],
     []
   ],

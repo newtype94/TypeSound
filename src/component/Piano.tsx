@@ -5,14 +5,14 @@ import { Howl, Howler } from "howler";
 import { FSpianoToKey } from "../config/toKeyConfig";
 import useKeyPress from "../hooks/useKeyPress";
 import { Row, Col } from "react-bootstrap";
-import { FSchordArray } from "../config/chordConfig";
+import { FSchordArray, FSchordEnum } from "../config/chordConfig";
 import { FSinstrumentEnum } from "../config/instrumentConfig";
+import { celloSound } from "../lib/cello";
 
 const inst: string = FSinstrumentEnum.acoustic_grand_piano;
 
 const Piano = ({ instrument = inst }) => {
   const [octave, setOctave] = useState(4);
-  const src = "/soundfont/MusyngKite/" + instrument + "-mp3/";
 
   const octaveUp = useKeyPress(FSpianoToKey.OctaveUp);
   const octaveDown = useKeyPress(FSpianoToKey.OctaveDown);
@@ -30,166 +30,76 @@ const Piano = ({ instrument = inst }) => {
   const pressBb = useKeyPress(FSpianoToKey.Bb);
   const pressB = useKeyPress(FSpianoToKey.B);
 
-  let sound: Howl[] = [];
-  FSchordArray.forEach(value => {
-    sound.push(
-      new Howl({ src: [src + value + octave + ".mp3"], autoplay: false })
-    );
-  });
-
-  Howler.volume(1);
+  const pressEffect = (press: boolean, chord: FSchordEnum) => {
+    let toStop;
+    if (press) {
+      toStop = celloSound[chord + octave].play();
+      const pressed = document.getElementById(chord);
+      pressed!.classList.add("playing");
+    } else {
+      celloSound[chord + (octave - 1)].stop(toStop);
+      celloSound[chord + octave].stop(toStop);
+      celloSound[chord + (octave + 1)].stop(toStop);
+      const pressed = document.getElementById(chord);
+      pressed!.classList.remove("playing");
+    }
+  };
 
   useEffect(() => {
     if (octaveUp && octave < 7) {
       setOctave(octave + 1);
     }
-    if (octaveDown && octave > 0) {
+    if (octaveDown && octave > 1) {
       setOctave(octave - 1);
     }
   }, [octaveUp, octaveDown]);
 
   useEffect(() => {
-    if (pressC) {
-      sound[0].play();
-      const pressed = document.getElementById("C");
-      pressed!.classList.add("playing");
-    } else {
-      sound[0].stop();
-      const pressed = document.getElementById("C");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressC, FSchordEnum.C);
   }, [pressC]);
 
   useEffect(() => {
-    if (pressDb) {
-      sound[1].play();
-      const pressed = document.getElementById("Db");
-      pressed!.classList.add("playing");
-    } else {
-      sound[1].stop();
-      const pressed = document.getElementById("Db");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressDb, FSchordEnum.Db);
   }, [pressDb]);
 
   useEffect(() => {
-    if (pressD) {
-      sound[2].play();
-      const pressed = document.getElementById("D");
-      pressed!.classList.add("playing");
-    } else {
-      sound[2].stop();
-      const pressed = document.getElementById("D");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressD, FSchordEnum.D);
   }, [pressD]);
 
   useEffect(() => {
-    if (pressEb) {
-      sound[3].play();
-      const pressed = document.getElementById("Eb");
-      pressed!.classList.add("playing");
-    } else {
-      sound[3].stop();
-      const pressed = document.getElementById("Eb");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressEb, FSchordEnum.Eb);
   }, [pressEb]);
 
   useEffect(() => {
-    if (pressE) {
-      sound[4].play();
-      const pressed = document.getElementById("E");
-      pressed!.classList.add("playing");
-    } else {
-      sound[4].stop();
-      const pressed = document.getElementById("E");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressE, FSchordEnum.E);
   }, [pressE]);
 
   useEffect(() => {
-    if (pressF) {
-      sound[5].play();
-      const pressed = document.getElementById("F");
-      pressed!.classList.add("playing");
-    } else {
-      sound[5].stop();
-      const pressed = document.getElementById("F");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressF, FSchordEnum.F);
   }, [pressF]);
 
   useEffect(() => {
-    if (pressGb) {
-      sound[6].play();
-      const pressed = document.getElementById("Gb");
-      pressed!.classList.add("playing");
-    } else {
-      sound[6].stop();
-      const pressed = document.getElementById("Gb");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressGb, FSchordEnum.Gb);
   }, [pressGb]);
 
   useEffect(() => {
-    if (pressG) {
-      sound[7].play();
-      const pressed = document.getElementById("G");
-      pressed!.classList.add("playing");
-    } else {
-      sound[7].stop();
-      const pressed = document.getElementById("G");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressG, FSchordEnum.G);
   }, [pressG]);
 
   useEffect(() => {
-    if (pressAb) {
-      sound[8].play();
-      const pressed = document.getElementById("Ab");
-      pressed!.classList.add("playing");
-    } else {
-      sound[8].stop();
-      const pressed = document.getElementById("Ab");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressAb, FSchordEnum.Ab);
   }, [pressAb]);
 
   useEffect(() => {
-    if (pressA) {
-      sound[9].play();
-      const pressed = document.getElementById("A");
-      pressed!.classList.add("playing");
-    } else {
-      sound[9].stop();
-      const pressed = document.getElementById("A");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressA, FSchordEnum.A);
   }, [pressA]);
 
   useEffect(() => {
-    if (pressBb) {
-      sound[10].play();
-      const pressed = document.getElementById("Bb");
-      pressed!.classList.add("playing");
-    } else {
-      sound[10].stop();
-      const pressed = document.getElementById("Bb");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressBb, FSchordEnum.Bb);
   }, [pressBb]);
 
   useEffect(() => {
-    if (pressB) {
-      sound[11].play();
-      const pressed = document.getElementById("B");
-      pressed!.classList.add("playing");
-    } else {
-      sound[11].stop();
-      const pressed = document.getElementById("B");
-      pressed!.classList.remove("playing");
-    }
+    pressEffect(pressB, FSchordEnum.B);
   }, [pressB]);
 
   return (

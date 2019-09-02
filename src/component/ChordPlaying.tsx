@@ -37,45 +37,79 @@ const ChordPlaying = ({
   const pressF = useKeyPress(FSchordToKey.F);
   const pressG = useKeyPress(FSchordToKey.G);
 
-  useEffect(() => {
-    if (!pressC) {
-      // Key Off
-      setPlaying([]);
-    } else if (pressC && chordVariation === FSchordEnum.C + variation) {
-      // Key Re-On
-      if (pattern === FSpatternEnum.parallel) {
+  const chordFirstPressed = (chord: FSchordEnum) => {
+    setChord(chord);
+    setChordVariation(chord + variation);
+    if (pattern === FSpatternEnum.parallel) {
+      const gotNote = getParallelNote(chord + variation, octave);
+      setNote(gotNote);
+      setPlaying(gotNote);
+      setPlayed(gotNote);
+    } else if (pattern === FSpatternEnum.asc) {
+      const gotNote = getAscNote(chord + variation, octave);
+      setNote(gotNote);
+      setPlaying([gotNote[0]]);
+      setPlayed([gotNote[0]]);
+      setOrder(1);
+    } else if (pattern === FSpatternEnum.des) {
+      const gotNote = getDesNote(chord + variation, octave);
+      setNote(gotNote);
+      setPlaying([gotNote[0]]);
+      setPlayed([gotNote[0]]);
+      setOrder(1);
+    }
+  };
+
+  const chordRePressed = () => {
+    switch (pattern) {
+      case FSpatternEnum.parallel:
         setPlaying(note);
         setPlayed(note);
-      } else if (pattern === FSpatternEnum.asc) {
-        console.log(note);
+        break;
+      case FSpatternEnum.asc:
         setPlaying([note[order]]);
         setPlayed([note[order]]);
         if (order === note.length - 1) setOrder(0);
         else setOrder(order + 1);
-      } else if (pattern === FSpatternEnum.des) {
-      }
-    } else {
-      // Key First-On
-      console.log(FSchordEnum.C + variation);
-      setChord(FSchordEnum.C);
-      setChordVariation(FSchordEnum.C + variation);
-      if (pattern === FSpatternEnum.parallel) {
-        const gotNote = getParallelNote(FSchordEnum.C + variation, octave);
-        setNote(gotNote);
-        setPlaying(gotNote);
-        setPlayed(gotNote);
-      } else if (pattern === FSpatternEnum.asc) {
-        const gotNote = getAscNote(FSchordEnum.C + variation, octave);
-        setNote(gotNote);
-        setPlaying([gotNote[0]]);
-        setPlayed([gotNote[0]]);
-        setOrder(1);
-      } else if (pattern === FSpatternEnum.des) {
-        const gotNote = getDesNote(FSchordEnum.C + variation, octave);
-        setNote(gotNote);
-        setOrder(gotNote.length - 1);
-      }
+        break;
+      case FSpatternEnum.des:
+        setPlaying([note[order]]);
+        setPlayed([note[order]]);
+        if (order === note.length - 1) setOrder(0);
+        else setOrder(order + 1);
+        break;
     }
+  };
+
+  const chordEffect = (press: boolean, chord: FSchordEnum) => {
+    if (press && chordVariation !== chord + variation) {
+      chordFirstPressed(chord);
+    } else if (press) {
+      chordRePressed();
+    } else if (!press) {
+      setPlaying([]);
+    }
+  };
+
+  useEffect(() => {
+    let gotNote: any;
+    switch (pattern) {
+      case FSpatternEnum.parallel:
+        gotNote = getParallelNote(chord + variation, octave);
+        break;
+      case FSpatternEnum.asc:
+        gotNote = getAscNote(FSchordEnum.C + variation, octave);
+        break;
+      case FSpatternEnum.des:
+        gotNote = getDesNote(FSchordEnum.C + variation, octave);
+        break;
+    }
+    setNote(gotNote);
+    setOrder(0);
+  }, [pattern]);
+
+  useEffect(() => {
+    chordEffect(pressC, FSchordEnum.C);
   }, [pressC]);
 
   return (
