@@ -45,3 +45,9 @@ export enum FSvariationTokey {
   sustwo = "r",
   susfour = "t"
 }
+
+export enum FSpatternTokey {
+  parallel = "Delete",
+  asc = "End",
+  des = "PageDown"
+}

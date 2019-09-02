@@ -203,8 +203,8 @@ export enum FSchordVariationEnum {
   Bsus4 = "Bsus4"
 }
 
-export enum FSpatterEnum {
-  up = "up",
-  down = "down",
+export enum FSpatternEnum {
+  asc = "asc",
+  des = "des",
   parallel = "parallel"
 }

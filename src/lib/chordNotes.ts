@@ -114,7 +114,11 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.Gbsus2]: [[], [], []],
   [FSchordVariationEnum.Gbsus4]: [[], [], []],
   // G
-  [FSchordVariationEnum.GMajor]: [[], [], []],
+  [FSchordVariationEnum.GMajor]: [
+    [FSchordEnum.G, FSchordEnum.B],
+    [FSchordEnum.D],
+    []
+  ],
   [FSchordVariationEnum.Gm]: [[], [], []],
   [FSchordVariationEnum.Gm6]: [[], [], []],
   [FSchordVariationEnum.Gm7]: [[], [], []],

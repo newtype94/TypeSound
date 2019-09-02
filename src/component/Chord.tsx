@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 
 import "../css/Chord.css";
-import { FSchordToKey, FSvariationTokey } from "../config/toKeyConfig";
+import {
+  FSchordToKey,
+  FSvariationTokey,
+  FSpatternTokey
+} from "../config/toKeyConfig";
 import useKeyPress from "../hooks/useKeyPress";
 import {
   FSvariationEnum,
   FSvariationArray,
-  FSpatterEnum
+  FSpatternEnum
 } from "../config/chordConfig";
 import ChordPlaying from "./ChordPlaying";
 import { FSinstrumentEnum } from "../config/instrumentConfig";
@@ -15,13 +19,16 @@ const inst: string = FSinstrumentEnum.acoustic_grand_piano;
 
 const Chord = ({ instrument = inst }) => {
   const [octave, setOctave] = useState(4);
+  const [pattern, setPattern] = useState<FSpatternEnum>(FSpatternEnum.parallel);
   const [variation, setVariation] = useState<FSvariationEnum>(
     FSvariationEnum.Major
   );
-  const [pattern, setPattern] = useState<FSpatterEnum>(FSpatterEnum.parallel);
 
   const octaveUp = useKeyPress(FSchordToKey.OctaveUp);
   const octaveDown = useKeyPress(FSchordToKey.OctaveDown);
+  const patternParallel = useKeyPress(FSpatternTokey.parallel);
+  const patternAsc = useKeyPress(FSpatternTokey.asc);
+  const patternDes = useKeyPress(FSpatternTokey.des);
 
   const variationPressed = [
     useKeyPress(FSvariationTokey.Major),
@@ -40,11 +47,20 @@ const Chord = ({ instrument = inst }) => {
   useEffect(() => {
     if (octaveUp && octave < 7) {
       setOctave(octave + 1);
-    }
-    if (octaveDown && octave > 0) {
+    } else if (octaveDown && octave > 0) {
       setOctave(octave - 1);
     }
   }, [octaveUp, octaveDown]);
+
+  useEffect(() => {
+    if (patternParallel) {
+      setPattern(FSpatternEnum.parallel);
+    } else if (patternAsc) {
+      setPattern(FSpatternEnum.asc);
+    } else if (patternDes) {
+      setPattern(FSpatternEnum.des);
+    }
+  }, [patternParallel, patternAsc, patternDes]);
 
   useEffect(() => {
     for (let i = 0; i < variationPressed.length; i++) {
