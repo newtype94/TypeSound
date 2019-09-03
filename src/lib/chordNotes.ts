@@ -37,6 +37,7 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.C7]: [[], [], []],
   [FSchordVariationEnum.Csus2]: [[], [], []],
   [FSchordVariationEnum.Csus4]: [[], [], []],
+
   // Db
   [FSchordVariationEnum.DbMajor]: [[], [], []],
   [FSchordVariationEnum.Dbm]: [[], [], []],
@@ -49,10 +50,23 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.Db7]: [[], [], []],
   [FSchordVariationEnum.Dbsus2]: [[], [], []],
   [FSchordVariationEnum.Dbsus4]: [[], [], []],
+
   // D
-  [FSchordVariationEnum.DMajor]: [[], [], []],
-  [FSchordVariationEnum.Dm]: [[], [], []],
-  [FSchordVariationEnum.Dm6]: [[], [], []],
+  [FSchordVariationEnum.DMajor]: [
+    [FSchordEnum.D, FSchordEnum.Gb, FSchordEnum.A],
+    [],
+    []
+  ],
+  [FSchordVariationEnum.Dm]: [
+    [FSchordEnum.D, FSchordEnum.F, FSchordEnum.A],
+    [],
+    []
+  ],
+  [FSchordVariationEnum.Dm6]: [
+    [FSchordEnum.D, FSchordEnum.Gb, FSchordEnum.A, FSchordEnum.B],
+    [],
+    []
+  ],
   [FSchordVariationEnum.Dm7]: [[], [], []],
   [FSchordVariationEnum.Daug]: [[], [], []],
   [FSchordVariationEnum.Ddim]: [[], [], []],
@@ -61,6 +75,7 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.D7]: [[], [], []],
   [FSchordVariationEnum.Dsus2]: [[], [], []],
   [FSchordVariationEnum.Dsus4]: [[], [], []],
+
   // Eb
   [FSchordVariationEnum.EbMajor]: [[], [], []],
   [FSchordVariationEnum.Ebm]: [[], [], []],
@@ -73,6 +88,7 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.Eb7]: [[], [], []],
   [FSchordVariationEnum.Ebsus2]: [[], [], []],
   [FSchordVariationEnum.Ebsus4]: [[], [], []],
+
   // E
   [FSchordVariationEnum.EMajor]: [[], [], []],
   [FSchordVariationEnum.Em]: [[], [], []],
@@ -85,6 +101,7 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.E7]: [[], [], []],
   [FSchordVariationEnum.Esus2]: [[], [], []],
   [FSchordVariationEnum.Esus4]: [[], [], []],
+
   // F
   [FSchordVariationEnum.FMajor]: [
     [FSchordEnum.F, FSchordEnum.A],
@@ -101,6 +118,7 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.F7]: [[], [], []],
   [FSchordVariationEnum.Fsus2]: [[], [], []],
   [FSchordVariationEnum.Fsus4]: [[], [], []],
+
   // Gb
   [FSchordVariationEnum.GbMajor]: [[], [], []],
   [FSchordVariationEnum.Gbm]: [[], [], []],
@@ -113,13 +131,18 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.Gb7]: [[], [], []],
   [FSchordVariationEnum.Gbsus2]: [[], [], []],
   [FSchordVariationEnum.Gbsus4]: [[], [], []],
+
   // G
   [FSchordVariationEnum.GMajor]: [
     [FSchordEnum.G, FSchordEnum.B],
     [FSchordEnum.D],
     []
   ],
-  [FSchordVariationEnum.Gm]: [[], [], []],
+  [FSchordVariationEnum.Gm]: [
+    [FSchordEnum.G, FSchordEnum.Bb],
+    [FSchordEnum.D],
+    []
+  ],
   [FSchordVariationEnum.Gm6]: [[], [], []],
   [FSchordVariationEnum.Gm7]: [[], [], []],
   [FSchordVariationEnum.Gaug]: [[], [], []],
@@ -129,6 +152,7 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.G7]: [[], [], []],
   [FSchordVariationEnum.Gsus2]: [[], [], []],
   [FSchordVariationEnum.Gsus4]: [[], [], []],
+
   // Ab
   [FSchordVariationEnum.AbMajor]: [[], [], []],
   [FSchordVariationEnum.Abm]: [[], [], []],
@@ -141,6 +165,7 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.Ab7]: [[], [], []],
   [FSchordVariationEnum.Absus2]: [[], [], []],
   [FSchordVariationEnum.Absus4]: [[], [], []],
+
   // A
   [FSchordVariationEnum.AMajor]: [[], [], []],
   [FSchordVariationEnum.Am]: [[], [], []],
@@ -153,6 +178,7 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.A7]: [[], [], []],
   [FSchordVariationEnum.Asus2]: [[], [], []],
   [FSchordVariationEnum.Asus4]: [[], [], []],
+
   // Bb
   [FSchordVariationEnum.BbMajor]: [[], [], []],
   [FSchordVariationEnum.Bbm]: [[], [], []],
@@ -165,6 +191,7 @@ export const chordNotes: { [x: string]: FSchordEnum[][] } = {
   [FSchordVariationEnum.Bb7]: [[], [], []],
   [FSchordVariationEnum.Bbsus2]: [[], [], []],
   [FSchordVariationEnum.Bbsus4]: [[], [], []],
+
   // B
   [FSchordVariationEnum.BMajor]: [[], [], []],
   [FSchordVariationEnum.Bm]: [[], [], []],

@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import "../css/Piano.css";
-import { Howl, Howler } from "howler";
 import { FSpianoToKey } from "../config/toKeyConfig";
 import useKeyPress from "../hooks/useKeyPress";
 import { Row, Col } from "react-bootstrap";
-import { FSchordArray, FSchordEnum } from "../config/chordConfig";
+import { FSchordEnum } from "../config/chordConfig";
 import { FSinstrumentEnum } from "../config/instrumentConfig";
 import { rightSound } from "../lib/rightSound";
-
-const inst: string = FSinstrumentEnum.acoustic_grand_piano;
 
 const Piano = () => {
   const [octave, setOctave] = useState(4);

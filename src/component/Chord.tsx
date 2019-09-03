@@ -13,9 +13,6 @@ import {
   FSpatternEnum
 } from "../config/chordConfig";
 import ChordPlaying from "./ChordPlaying";
-import { FSinstrumentEnum } from "../config/instrumentConfig";
-
-const inst: string = FSinstrumentEnum.acoustic_grand_piano;
 
 const Chord = () => {
   const [octave, setOctave] = useState(4);

@@ -12,6 +12,11 @@ import {
 } from "../config/chordConfig";
 import { getParallelNote, getAscNote, getDesNote } from "../utils/getNote";
 import ChordSound from "./ChordSound";
+import {
+  FaRegWindowMinimize,
+  FaChevronDown,
+  FaChevronUp
+} from "react-icons/fa";
 
 const ChordPlaying = ({
   octave = 4,
@@ -30,6 +35,7 @@ const ChordPlaying = ({
   const [order, setOrder] = useState(0);
 
   const pressC = useKeyPress(FSchordToKey.C);
+  const pressD = useKeyPress(FSchordToKey.D);
   const pressF = useKeyPress(FSchordToKey.F);
   const pressG = useKeyPress(FSchordToKey.G);
 
@@ -108,10 +114,22 @@ const ChordPlaying = ({
     chordEffect(pressC, FSchordEnum.C);
   }, [pressC]);
 
+  useEffect(() => {
+    chordEffect(pressD, FSchordEnum.D);
+  }, [pressD]);
+
+  useEffect(() => {
+    chordEffect(pressF, FSchordEnum.F);
+  }, [pressF]);
+
+  useEffect(() => {
+    chordEffect(pressG, FSchordEnum.G);
+  }, [pressG]);
+
   return (
     <Row className="mt-4">
       <Col xs={6}>
-        <div className="box">
+        <div className="leftBox">
           {octave}&nbsp;Octave
           <br />
           {chord}&nbsp;
@@ -119,7 +137,13 @@ const ChordPlaying = ({
         </div>
       </Col>
       <Col xs={6}>
-        <div className="box">{pattern}</div>
+        <div className="rightBox">
+          {pattern === FSpatternEnum.parallel && (
+            <FaRegWindowMinimize></FaRegWindowMinimize>
+          )}
+          {pattern === FSpatternEnum.asc && <FaChevronUp></FaChevronUp>}
+          {pattern === FSpatternEnum.des && <FaChevronDown></FaChevronDown>}
+        </div>
       </Col>
       <ChordSound played={played} playing={playing}></ChordSound>
     </Row>
