@@ -7,7 +7,7 @@ import useKeyPress from "../hooks/useKeyPress";
 import { Row, Col } from "react-bootstrap";
 import { FSchordArray, FSchordEnum } from "../config/chordConfig";
 import { FSinstrumentEnum } from "../config/instrumentConfig";
-import { celloSound } from "../lib/cello";
+import { rightSound } from "../lib/rightSound";
 
 const inst: string = FSinstrumentEnum.acoustic_grand_piano;
 
@@ -33,13 +33,13 @@ const Piano = ({ instrument = inst }) => {
   const pressEffect = (press: boolean, chord: FSchordEnum) => {
     let toStop;
     if (press) {
-      toStop = celloSound[chord + octave].play();
+      toStop = rightSound[chord + octave].play();
       const pressed = document.getElementById(chord);
       pressed!.classList.add("playing");
     } else {
-      celloSound[chord + (octave - 1)].stop(toStop);
-      celloSound[chord + octave].stop(toStop);
-      celloSound[chord + (octave + 1)].stop(toStop);
+      rightSound[chord + (octave - 1)].stop(toStop);
+      rightSound[chord + octave].stop(toStop);
+      rightSound[chord + (octave + 1)].stop(toStop);
       const pressed = document.getElementById(chord);
       pressed!.classList.remove("playing");
     }

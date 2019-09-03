@@ -1,8 +1,11 @@
 import { Howl, Howler } from "howler";
-const src = "/soundfont/MusyngKite/cello-mp3/";
+import { FSinstrumentEnum } from "../config/instrumentConfig";
+
+const src =
+  "/soundfont/MusyngKite/" + FSinstrumentEnum.acoustic_grand_piano + "-mp3/";
 
 //Create Sound Model
-export const celloSound: { [key: string]: Howl } = {
+export const rightSound: { [key: string]: Howl } = {
   C0: new Howl({
     src: [src + "C0.mp3"]
   }),

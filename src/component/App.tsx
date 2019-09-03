@@ -22,9 +22,8 @@ const App = () => {
   ) => {
     if (event.currentTarget.id === "chordInst")
       setChordInst(event.currentTarget.value!);
-    if (event.currentTarget.id === "pianoInst") {
+    if (event.currentTarget.id === "pianoInst")
       setPianoInst(event.currentTarget.value!);
-    }
   };
   return (
     <Container>
