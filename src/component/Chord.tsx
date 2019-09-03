@@ -17,7 +17,7 @@ import { FSinstrumentEnum } from "../config/instrumentConfig";
 
 const inst: string = FSinstrumentEnum.acoustic_grand_piano;
 
-const Chord = ({ instrument = inst }) => {
+const Chord = () => {
   const [octave, setOctave] = useState(4);
   const [pattern, setPattern] = useState<FSpatternEnum>(FSpatternEnum.parallel);
   const [variation, setVariation] = useState<FSvariationEnum>(
@@ -72,7 +72,6 @@ const Chord = ({ instrument = inst }) => {
 
   return (
     <ChordPlaying
-      instrument={instrument}
       octave={octave}
       variation={variation}
       pattern={pattern}

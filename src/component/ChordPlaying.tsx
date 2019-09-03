@@ -11,13 +11,9 @@ import {
   FSchordVariationEnum
 } from "../config/chordConfig";
 import { getParallelNote, getAscNote, getDesNote } from "../utils/getNote";
-import { FSinstrumentEnum } from "../config/instrumentConfig";
 import ChordSound from "./ChordSound";
 
-const inst: string = FSinstrumentEnum.acoustic_grand_piano;
-
 const ChordPlaying = ({
-  instrument = inst,
   octave = 4,
   variation = FSvariationEnum.Major,
   pattern = FSpatternEnum.parallel
@@ -125,11 +121,7 @@ const ChordPlaying = ({
       <Col xs={6}>
         <div className="box">{pattern}</div>
       </Col>
-      <ChordSound
-        instrument={instrument}
-        played={played}
-        playing={playing}
-      ></ChordSound>
+      <ChordSound played={played} playing={playing}></ChordSound>
     </Row>
   );
 };

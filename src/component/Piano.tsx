@@ -11,7 +11,7 @@ import { rightSound } from "../lib/rightSound";
 
 const inst: string = FSinstrumentEnum.acoustic_grand_piano;
 
-const Piano = ({ instrument = inst }) => {
+const Piano = () => {
   const [octave, setOctave] = useState(4);
 
   const octaveUp = useKeyPress(FSpianoToKey.OctaveUp);

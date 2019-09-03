@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import Piano from "./Piano";
 import Chord from "./Chord";
-import { Container, Col, Row, Form, FormControlProps } from "react-bootstrap";
+import {
+  Container,
+  Col,
+  Row,
+  Form,
+  FormControlProps,
+  Accordion,
+  Card,
+  Button
+} from "react-bootstrap";
 import { FSinstrumentList, FSinstrumentEnum } from "../config/instrumentConfig";
 import { ReplaceProps, BsPrefixProps } from "react-bootstrap/helpers";
 
 const App = () => {
-  const [chordInst, setChordInst] = useState<string>(
-    FSinstrumentEnum.acoustic_grand_piano
-  );
-  const [pianoInst, setPianoInst] = useState<string>(
-    FSinstrumentEnum.acoustic_grand_piano
-  );
   const instrumentChanged = (
     event: React.FormEvent<
       ReplaceProps<
@@ -20,13 +23,38 @@ const App = () => {
       >
     >
   ) => {
-    if (event.currentTarget.id === "chordInst")
-      setChordInst(event.currentTarget.value!);
-    if (event.currentTarget.id === "pianoInst")
-      setPianoInst(event.currentTarget.value!);
+    if (event.currentTarget.id === "chordInst") {
+      localStorage.setItem("leftInst", event.currentTarget.value!);
+      window.location.reload();
+    }
+    if (event.currentTarget.id === "pianoInst") {
+      localStorage.setItem("rightInst", event.currentTarget.value!);
+      window.location.reload();
+    }
   };
   return (
     <Container>
+      <Row className="mt-3">
+        <Col className="text-white text-center" xs={12}>
+          <h1>TypeSound</h1>
+        </Col>
+      </Row>
+      <Row className="mt-3">
+        <Col xs={12}>
+          <Accordion>
+            <Card bg="warning">
+              <Accordion.Toggle as={Card.Header} eventKey="0">
+                <b>+ Guide Book</b>
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="0">
+                <Card.Body>
+                  <img width="100%" src="/guide.jpg"></img>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          </Accordion>
+        </Col>
+      </Row>
       <Row className="mt-3">
         <Col xs={12}>
           <Form.Group controlId="Instrument">
@@ -39,7 +67,13 @@ const App = () => {
                   id="chordInst"
                 >
                   {FSinstrumentList.map(value => {
-                    return <option>{value}</option>;
+                    if (
+                      value ===
+                      (localStorage.getItem("leftInst") ||
+                        FSinstrumentEnum.acoustic_grand_piano)
+                    )
+                      return <option selected>{value}</option>;
+                    else return <option>{value}</option>;
                   })}
                 </Form.Control>
               </Col>
@@ -51,7 +85,13 @@ const App = () => {
                   id="pianoInst"
                 >
                   {FSinstrumentList.map(value => {
-                    return <option>{value}</option>;
+                    if (
+                      value ===
+                      (localStorage.getItem("rightInst") ||
+                        FSinstrumentEnum.acoustic_grand_piano)
+                    )
+                      return <option selected>{value}</option>;
+                    else return <option>{value}</option>;
                   })}
                 </Form.Control>
               </Col>
@@ -59,8 +99,8 @@ const App = () => {
           </Form.Group>
         </Col>
       </Row>
-      <Piano instrument={pianoInst} />
-      <Chord instrument={chordInst} />
+      <Piano />
+      <Chord />
     </Container>
   );
 };
