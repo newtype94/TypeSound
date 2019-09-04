@@ -156,8 +156,8 @@ const ChordPlaying = ({
   }, [pressB]);
 
   return (
-    <Row className="mt-4">
-      <Col xs={6}>
+    <Row>
+      <Col md={6} xs={12} className="mt-2">
         <div className="leftBox">
           {octave}&nbsp;Octave
           <br />
@@ -165,7 +165,7 @@ const ChordPlaying = ({
           {variation}
         </div>
       </Col>
-      <Col xs={6}>
+      <Col md={6} xs={12} className="mt-2">
         <div className="rightBox">
           {pattern === TSpatternEnum.parallel && (
             <FaRegWindowMinimize></FaRegWindowMinimize>
