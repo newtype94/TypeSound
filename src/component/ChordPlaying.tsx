@@ -30,7 +30,6 @@ const ChordPlaying = ({
 
   const [note, setNote] = useState<string[]>(["C4", "E4", "G4"]);
 
-  const [willStop, setWillStop] = useState<string[]>(["C4", "E4", "G4"]);
   const [playing, setPlaying] = useState<string[]>(["C4", "E4", "G4"]);
   const [order, setOrder] = useState(0);
 
@@ -54,18 +53,15 @@ const ChordPlaying = ({
       const gotNote = getParallelNote(chord + variation, octave);
       setNote(gotNote);
       setPlaying(gotNote);
-      setWillStop(gotNote);
     } else if (pattern === TSpatternEnum.asc) {
       const gotNote = getAscNote(chord + variation, octave);
       setNote(gotNote);
       setPlaying([gotNote[0]]);
-      setWillStop([gotNote[0]]);
       setOrder(1);
     } else if (pattern === TSpatternEnum.des) {
       const gotNote = getDesNote(chord + variation, octave);
       setNote(gotNote);
       setPlaying([gotNote[0]]);
-      setWillStop([gotNote[0]]);
       setOrder(1);
     }
   };
@@ -74,17 +70,14 @@ const ChordPlaying = ({
     switch (pattern) {
       case TSpatternEnum.parallel:
         setPlaying(note);
-        setWillStop(note);
         break;
       case TSpatternEnum.asc:
         setPlaying([note[order]]);
-        setWillStop([note[order]]);
         if (order === note.length - 1) setOrder(0);
         else setOrder(order + 1);
         break;
       case TSpatternEnum.des:
         setPlaying([note[order]]);
-        setWillStop([note[order]]);
         if (order === note.length - 1) setOrder(0);
         else setOrder(order + 1);
         break;
@@ -174,7 +167,7 @@ const ChordPlaying = ({
           {pattern === TSpatternEnum.des && <FaChevronDown></FaChevronDown>}
         </div>
       </Col>
-      <ChordSound willStop={willStop} playing={playing}></ChordSound>
+      <ChordSound playing={playing}></ChordSound>
     </Row>
   );
 };

@@ -31,6 +31,7 @@ const App = () => {
       window.location.reload();
     }
   };
+
   return (
     <Container>
       <Row className="mt-3">
