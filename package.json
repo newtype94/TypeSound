@@ -1,6 +1,6 @@
 {
-  "name": "flex_sound",
-  "version": "0.1.0",
+  "name": "type_sound",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@types/bootstrap": "^4.3.1",
