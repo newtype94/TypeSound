@@ -19,7 +19,10 @@ const GuideBook = () => {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
-                <h6>-You may use Chrome (with good computer..)</h6>
+                <h6>-You may use Chrome( IE XXX )</h6>
+                <h6>
+                  -Keyboard is necessary. On mobile, use Bluetooth keyboard
+                </h6>
                 <h6>
                   -There are 3 chord patterns (&nbsp;
                   <FaRegWindowMinimize></FaRegWindowMinimize>
