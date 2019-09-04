@@ -13,11 +13,12 @@ const ChordSound = ({ playing = [""] }) => {
       willStop.forEach(value => {
         leftSound[value.chord].stop(value.id);
       });
-      setWillStop([]);
+      const tempStop: { chord: string; id: number }[] = [];
       playing.forEach(value => {
         const soundId = leftSound[value].play();
-        willStop.push({ chord: value, id: soundId });
+        tempStop.push({ chord: value, id: soundId });
       });
+      setWillStop(tempStop);
     }
   }, [playing]);
 

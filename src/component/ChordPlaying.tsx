@@ -10,7 +10,7 @@ import {
   TSpatternEnum,
   TSchordVariationEnum
 } from "../config/chordConfig";
-import { getParallelNote, getAscNote, getDesNote } from "../utils/getNote";
+import { getNote } from "../utils/getNote";
 import ChordSound from "./ChordSound";
 import {
   FaRegWindowMinimize,
@@ -50,16 +50,20 @@ const ChordPlaying = ({
     setChord(chord);
     setChordVariation(chord + variation);
     if (pattern === TSpatternEnum.parallel) {
-      const gotNote = getParallelNote(chord + variation, octave);
+      const gotNote = getNote(
+        chord + variation,
+        octave,
+        TSpatternEnum.parallel
+      );
       setNote(gotNote);
       setPlaying(gotNote);
     } else if (pattern === TSpatternEnum.asc) {
-      const gotNote = getAscNote(chord + variation, octave);
+      const gotNote = getNote(chord + variation, octave, TSpatternEnum.asc);
       setNote(gotNote);
       setPlaying([gotNote[0]]);
       setOrder(1);
     } else if (pattern === TSpatternEnum.des) {
-      const gotNote = getDesNote(chord + variation, octave);
+      const gotNote = getNote(chord + variation, octave, TSpatternEnum.des);
       setNote(gotNote);
       setPlaying([gotNote[0]]);
       setOrder(1);
@@ -95,19 +99,7 @@ const ChordPlaying = ({
   };
 
   useEffect(() => {
-    let gotNote: any;
-    switch (pattern) {
-      case TSpatternEnum.parallel:
-        gotNote = getParallelNote(chord + variation, octave);
-        break;
-      case TSpatternEnum.asc:
-        gotNote = getAscNote(chord + variation, octave);
-        break;
-      case TSpatternEnum.des:
-        gotNote = getDesNote(chord + variation, octave);
-        break;
-    }
-    setNote(gotNote);
+    setNote(getNote(chord + variation, octave, pattern));
     setOrder(0);
   }, [pattern]);
 
@@ -150,7 +142,7 @@ const ChordPlaying = ({
 
   return (
     <Row>
-      <Col md={6} xs={12} className="mt-2">
+      <Col md={6} xs={12} className="mt-3">
         <div className="leftBox">
           {octave}&nbsp;Octave
           <br />
@@ -158,7 +150,7 @@ const ChordPlaying = ({
           {variation}
         </div>
       </Col>
-      <Col md={6} xs={12} className="mt-2">
+      <Col md={6} xs={12} className="mt-3">
         <div className="rightBox">
           {pattern === TSpatternEnum.parallel && (
             <FaRegWindowMinimize></FaRegWindowMinimize>

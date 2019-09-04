@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import { TSinstrumentList, TSinstrumentEnum } from "../config/instrumentConfig";
 import { ReplaceProps, BsPrefixProps } from "react-bootstrap/helpers";
+import { FaKeyboard } from "react-icons/fa";
 
 const App = () => {
   const instrumentChanged = (
@@ -48,6 +49,14 @@ const App = () => {
               </Accordion.Toggle>
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
+                  <h3 style={{ color: "red", float: "left" }}>
+                    <FaKeyboard></FaKeyboard>
+                    Chord Map
+                  </h3>
+                  <h3 style={{ color: "skyblue", float: "right" }}>
+                    <FaKeyboard></FaKeyboard>
+                    Piano Map
+                  </h3>
                   <img width="100%" src="/guide.jpg"></img>
                 </Card.Body>
               </Accordion.Collapse>

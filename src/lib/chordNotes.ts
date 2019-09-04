@@ -69,8 +69,8 @@ export const chordNotes: { [x: string]: TSchordEnum[][] } = {
     [],
     []
   ],
-  [TSchordVariationEnum.Db6]: [
-    [TSchordEnum.Db, TSchordEnum.F, TSchordEnum.Ab, TSchordEnum.Bb],
+  [TSchordVariationEnum.Dbm6]: [
+    [TSchordEnum.Db, TSchordEnum.E, TSchordEnum.Ab, TSchordEnum.Bb],
     [],
     []
   ],

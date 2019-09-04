@@ -26,6 +26,19 @@ const Piano = () => {
   const pressBb = useKeyPress(TSpianoToKey.Bb);
   const pressB = useKeyPress(TSpianoToKey.B);
 
+  const [C, setC] = useState(false);
+  const [Db, setDb] = useState(false);
+  const [D, setD] = useState(false);
+  const [Eb, setEb] = useState(false);
+  const [E, setE] = useState(false);
+  const [F, setF] = useState(false);
+  const [Gb, setGb] = useState(false);
+  const [G, setG] = useState(false);
+  const [Ab, setAb] = useState(false);
+  const [A, setA] = useState(false);
+  const [Bb, setBb] = useState(false);
+  const [B, setB] = useState(false);
+
   const pressEffect = (press: boolean, chord: TSchordEnum) => {
     let toStop;
     if (press) {
@@ -51,52 +64,52 @@ const Piano = () => {
   }, [octaveUp, octaveDown]);
 
   useEffect(() => {
-    pressEffect(pressC, TSchordEnum.C);
-  }, [pressC]);
+    pressEffect(pressC || C, TSchordEnum.C);
+  }, [pressC, C]);
 
   useEffect(() => {
-    pressEffect(pressDb, TSchordEnum.Db);
-  }, [pressDb]);
+    pressEffect(pressDb || Db, TSchordEnum.Db);
+  }, [pressDb, Db]);
 
   useEffect(() => {
-    pressEffect(pressD, TSchordEnum.D);
-  }, [pressD]);
+    pressEffect(pressD || D, TSchordEnum.D);
+  }, [pressD, D]);
 
   useEffect(() => {
-    pressEffect(pressEb, TSchordEnum.Eb);
-  }, [pressEb]);
+    pressEffect(pressEb || Eb, TSchordEnum.Eb);
+  }, [pressEb, Eb]);
 
   useEffect(() => {
-    pressEffect(pressE, TSchordEnum.E);
-  }, [pressE]);
+    pressEffect(pressE || E, TSchordEnum.E);
+  }, [pressE, E]);
 
   useEffect(() => {
-    pressEffect(pressF, TSchordEnum.F);
-  }, [pressF]);
+    pressEffect(pressF || F, TSchordEnum.F);
+  }, [pressF, F]);
 
   useEffect(() => {
-    pressEffect(pressGb, TSchordEnum.Gb);
-  }, [pressGb]);
+    pressEffect(pressGb || Gb, TSchordEnum.Gb);
+  }, [pressGb, Gb]);
 
   useEffect(() => {
-    pressEffect(pressG, TSchordEnum.G);
-  }, [pressG]);
+    pressEffect(pressG || G, TSchordEnum.G);
+  }, [pressG, G]);
 
   useEffect(() => {
-    pressEffect(pressAb, TSchordEnum.Ab);
-  }, [pressAb]);
+    pressEffect(pressAb || Ab, TSchordEnum.Ab);
+  }, [pressAb, Ab]);
 
   useEffect(() => {
-    pressEffect(pressA, TSchordEnum.A);
-  }, [pressA]);
+    pressEffect(pressA || A, TSchordEnum.A);
+  }, [pressA, A]);
 
   useEffect(() => {
-    pressEffect(pressBb, TSchordEnum.Bb);
-  }, [pressBb]);
+    pressEffect(pressBb || Bb, TSchordEnum.Bb);
+  }, [pressBb, Bb]);
 
   useEffect(() => {
-    pressEffect(pressB, TSchordEnum.B);
-  }, [pressB]);
+    pressEffect(pressB || B, TSchordEnum.B);
+  }, [pressB, B]);
 
   return (
     <Row className="mt-2">
@@ -105,42 +118,92 @@ const Piano = () => {
       </Col>
       <Col xs={12}>
         <div className="keys">
-          <div className="key" id="C">
-            <span className="keyMapping">Y</span>
-          </div>
-          <div className="key sharp" id="Db">
-            <span className="keyMapping">7</span>
-          </div>
-          <div className="key" id="D">
-            <span className="keyMapping">U</span>
-          </div>
-          <div className="key sharp" id="Eb">
-            <span className="keyMapping">8</span>
-          </div>
-          <div className="key" id="E">
-            <span className="keyMapping">I</span>
-          </div>
-          <div className="key" id="F">
-            <span className="keyMapping">O</span>
-          </div>
-          <div className="key sharp" id="Gb">
-            <span className="keyMapping">0</span>
-          </div>
-          <div className="key" id="G">
-            <span className="keyMapping">P</span>
-          </div>
-          <div className="key sharp" id="Ab">
-            <span className="keyMapping">-</span>
-          </div>
-          <div className="key" id="A">
-            <span className="keyMapping">[</span>
-          </div>
-          <div className="key sharp" id="Bb">
-            <span className="keyMapping">=</span>
-          </div>
-          <div className="key" id="B">
-            <span className="keyMapping">]</span>
-          </div>
+          <div
+            className="key"
+            id="C"
+            onMouseDownCapture={() => setC(true)}
+            onMouseUp={() => setC(false)}
+            onMouseOut={() => setC(false)}
+          ></div>
+          <div
+            className="key sharp"
+            id="Db"
+            onMouseDownCapture={() => setDb(true)}
+            onMouseUp={() => setDb(false)}
+            onMouseOut={() => setDb(false)}
+          ></div>
+          <div
+            className="key"
+            id="D"
+            onMouseDownCapture={() => setD(true)}
+            onMouseUp={() => setD(false)}
+            onMouseOut={() => setD(false)}
+          ></div>
+          <div
+            className="key sharp"
+            id="Eb"
+            onMouseDownCapture={() => setEb(true)}
+            onMouseUp={() => setEb(false)}
+            onMouseOut={() => setEb(false)}
+          ></div>
+          <div
+            className="key"
+            id="E"
+            onMouseDownCapture={() => setE(true)}
+            onMouseUp={() => setE(false)}
+            onMouseOut={() => setE(false)}
+          ></div>
+          <div
+            className="key"
+            id="F"
+            onMouseDownCapture={() => setF(true)}
+            onMouseUp={() => setF(false)}
+            onMouseOut={() => setF(false)}
+          ></div>
+          <div
+            className="key sharp"
+            id="Gb"
+            onMouseDownCapture={() => setGb(true)}
+            onMouseUp={() => setGb(false)}
+            onMouseOut={() => setGb(false)}
+          ></div>
+          <div
+            className="key"
+            id="G"
+            onMouseDownCapture={() => setG(true)}
+            onMouseUp={() => setG(false)}
+            onMouseOut={() => setG(false)}
+          ></div>
+          <div
+            className="key sharp"
+            id="Ab"
+            onMouseDownCapture={() => setAb(true)}
+            onMouseUp={() => setAb(false)}
+            onMouseOut={() => setAb(false)}
+          ></div>
+          <div
+            className="key"
+            id="A"
+            onMouseDownCapture={() => setA(true)}
+            onMouseUp={() => setA(false)}
+            onMouseOut={() => setA(false)}
+          ></div>
+          <div
+            className="key sharp"
+            id="Bb"
+            onMouseDownCapture={() => setBb(true)}
+            onMouseUp={() => setBb(false)}
+            onMouseOut={() => setBb(false)}
+          ></div>
+          <div
+            className="key"
+            id="B"
+            onMouseDownCapture={() => {
+              setB(true);
+            }}
+            onMouseUp={() => setB(false)}
+            onMouseOut={() => setB(false)}
+          ></div>
         </div>
       </Col>
     </Row>
