@@ -1,4 +1,4 @@
-export enum FSpianoToKey {
+export enum TSpianoToKey {
   C = "y",
   Db = "7",
   D = "u",
@@ -11,11 +11,11 @@ export enum FSpianoToKey {
   A = "[",
   Bb = "=",
   B = "]",
-  OctaveDown = "Backspace",
-  OctaveUp = "Enter"
+  OctaveDown = "\\",
+  OctaveUp = "9"
 }
 
-export enum FSchordToKey {
+export enum TSchordToKey {
   C = "z",
   Db = "s",
   D = "x",
@@ -32,7 +32,7 @@ export enum FSchordToKey {
   OctaveUp = "."
 }
 
-export enum FSvariationTokey {
+export enum TSvariationTokey {
   Major = "1",
   m = "2",
   msix = "3",
@@ -46,7 +46,7 @@ export enum FSvariationTokey {
   susfour = "t"
 }
 
-export enum FSpatternTokey {
+export enum TSpatternTokey {
   parallel = "Delete",
   asc = "End",
   des = "PageDown"

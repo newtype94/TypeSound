@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Piano from "./Piano";
 import Chord from "./Chord";
 import {
@@ -8,10 +8,9 @@ import {
   Form,
   FormControlProps,
   Accordion,
-  Card,
-  Button
+  Card
 } from "react-bootstrap";
-import { FSinstrumentList, FSinstrumentEnum } from "../config/instrumentConfig";
+import { TSinstrumentList, TSinstrumentEnum } from "../config/instrumentConfig";
 import { ReplaceProps, BsPrefixProps } from "react-bootstrap/helpers";
 
 const App = () => {
@@ -66,11 +65,11 @@ const App = () => {
                   onChange={instrumentChanged}
                   id="chordInst"
                 >
-                  {FSinstrumentList.map(value => {
+                  {TSinstrumentList.map(value => {
                     if (
                       value ===
                       (localStorage.getItem("leftInst") ||
-                        FSinstrumentEnum.acoustic_grand_piano)
+                        TSinstrumentEnum.acoustic_grand_piano)
                     )
                       return <option selected>{value}</option>;
                     else return <option>{value}</option>;
@@ -84,11 +83,11 @@ const App = () => {
                   onChange={instrumentChanged}
                   id="pianoInst"
                 >
-                  {FSinstrumentList.map(value => {
+                  {TSinstrumentList.map(value => {
                     if (
                       value ===
                       (localStorage.getItem("rightInst") ||
-                        FSinstrumentEnum.acoustic_grand_piano)
+                        TSinstrumentEnum.acoustic_grand_piano)
                     )
                       return <option selected>{value}</option>;
                     else return <option>{value}</option>;

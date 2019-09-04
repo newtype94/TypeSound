@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { leftSound } from "../lib/leftSound";
 
-const ChordSound = ({ played = [""], playing = [""] }) => {
+const ChordSound = ({ willStop = [""], playing = [""] }) => {
   useEffect(() => {
     if (playing.length === 0) {
-      played.forEach(value => {
+      willStop.forEach(value => {
         leftSound[value].stop();
       });
     } else {

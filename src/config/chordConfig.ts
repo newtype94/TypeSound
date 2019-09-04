@@ -1,4 +1,4 @@
-export enum FSchordEnum {
+export enum TSchordEnum {
   C = "C",
   D = "D",
   E = "E",
@@ -13,22 +13,22 @@ export enum FSchordEnum {
   Bb = "Bb"
 }
 
-export const FSchordArray = [
-  FSchordEnum.C,
-  FSchordEnum.Db,
-  FSchordEnum.D,
-  FSchordEnum.Eb,
-  FSchordEnum.E,
-  FSchordEnum.F,
-  FSchordEnum.Gb,
-  FSchordEnum.G,
-  FSchordEnum.Ab,
-  FSchordEnum.A,
-  FSchordEnum.Bb,
-  FSchordEnum.B
+export const TSchordArray = [
+  TSchordEnum.C,
+  TSchordEnum.Db,
+  TSchordEnum.D,
+  TSchordEnum.Eb,
+  TSchordEnum.E,
+  TSchordEnum.F,
+  TSchordEnum.Gb,
+  TSchordEnum.G,
+  TSchordEnum.Ab,
+  TSchordEnum.A,
+  TSchordEnum.Bb,
+  TSchordEnum.B
 ];
 
-export enum FSvariationEnum {
+export enum TSvariationEnum {
   Major = "Major",
   m = "m",
   msix = "m6",
@@ -42,21 +42,21 @@ export enum FSvariationEnum {
   susfour = "sus4"
 }
 
-export const FSvariationArray = [
-  FSvariationEnum.Major,
-  FSvariationEnum.m,
-  FSvariationEnum.msix,
-  FSvariationEnum.mseven,
-  FSvariationEnum.aug,
-  FSvariationEnum.dim,
-  FSvariationEnum.two,
-  FSvariationEnum.six,
-  FSvariationEnum.seven,
-  FSvariationEnum.sustwo,
-  FSvariationEnum.susfour
+export const TSvariationArray = [
+  TSvariationEnum.Major,
+  TSvariationEnum.m,
+  TSvariationEnum.msix,
+  TSvariationEnum.mseven,
+  TSvariationEnum.aug,
+  TSvariationEnum.dim,
+  TSvariationEnum.two,
+  TSvariationEnum.six,
+  TSvariationEnum.seven,
+  TSvariationEnum.sustwo,
+  TSvariationEnum.susfour
 ];
 
-export enum FSchordVariationEnum {
+export enum TSchordVariationEnum {
   // C
   CMajor = "CMajor",
   Cm = "Cm",
@@ -127,8 +127,8 @@ export enum FSchordVariationEnum {
   F2 = "F2",
   F6 = "F6",
   F7 = "F7",
-  Fsus2 = "Fsus2",
-  Fsus4 = "Fsus4",
+  TSus2 = "TSus2",
+  TSus4 = "TSus4",
   // Gb
   GbMajor = "GbMajor",
   Gbm = "Gbm",
@@ -203,7 +203,7 @@ export enum FSchordVariationEnum {
   Bsus4 = "Bsus4"
 }
 
-export enum FSpatternEnum {
+export enum TSpatternEnum {
   asc = "asc",
   des = "des",
   parallel = "parallel"

@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from "react";
 
 import "../css/Piano.css";
-import { FSpianoToKey } from "../config/toKeyConfig";
+import { TSpianoToKey } from "../config/toKeyConfig";
 import useKeyPress from "../hooks/useKeyPress";
 import { Row, Col } from "react-bootstrap";
-import { FSchordEnum } from "../config/chordConfig";
-import { FSinstrumentEnum } from "../config/instrumentConfig";
+import { TSchordEnum } from "../config/chordConfig";
 import { rightSound } from "../lib/rightSound";
 
 const Piano = () => {
   const [octave, setOctave] = useState(4);
 
-  const octaveUp = useKeyPress(FSpianoToKey.OctaveUp);
-  const octaveDown = useKeyPress(FSpianoToKey.OctaveDown);
+  const octaveUp = useKeyPress(TSpianoToKey.OctaveUp);
+  const octaveDown = useKeyPress(TSpianoToKey.OctaveDown);
 
-  const pressC = useKeyPress(FSpianoToKey.C);
-  const pressDb = useKeyPress(FSpianoToKey.Db);
-  const pressD = useKeyPress(FSpianoToKey.D);
-  const pressEb = useKeyPress(FSpianoToKey.Eb);
-  const pressE = useKeyPress(FSpianoToKey.E);
-  const pressF = useKeyPress(FSpianoToKey.F);
-  const pressGb = useKeyPress(FSpianoToKey.Gb);
-  const pressG = useKeyPress(FSpianoToKey.G);
-  const pressAb = useKeyPress(FSpianoToKey.Ab);
-  const pressA = useKeyPress(FSpianoToKey.A);
-  const pressBb = useKeyPress(FSpianoToKey.Bb);
-  const pressB = useKeyPress(FSpianoToKey.B);
+  const pressC = useKeyPress(TSpianoToKey.C);
+  const pressDb = useKeyPress(TSpianoToKey.Db);
+  const pressD = useKeyPress(TSpianoToKey.D);
+  const pressEb = useKeyPress(TSpianoToKey.Eb);
+  const pressE = useKeyPress(TSpianoToKey.E);
+  const pressF = useKeyPress(TSpianoToKey.F);
+  const pressGb = useKeyPress(TSpianoToKey.Gb);
+  const pressG = useKeyPress(TSpianoToKey.G);
+  const pressAb = useKeyPress(TSpianoToKey.Ab);
+  const pressA = useKeyPress(TSpianoToKey.A);
+  const pressBb = useKeyPress(TSpianoToKey.Bb);
+  const pressB = useKeyPress(TSpianoToKey.B);
 
-  const pressEffect = (press: boolean, chord: FSchordEnum) => {
+  const pressEffect = (press: boolean, chord: TSchordEnum) => {
     let toStop;
     if (press) {
       toStop = rightSound[chord + octave].play();
@@ -52,51 +51,51 @@ const Piano = () => {
   }, [octaveUp, octaveDown]);
 
   useEffect(() => {
-    pressEffect(pressC, FSchordEnum.C);
+    pressEffect(pressC, TSchordEnum.C);
   }, [pressC]);
 
   useEffect(() => {
-    pressEffect(pressDb, FSchordEnum.Db);
+    pressEffect(pressDb, TSchordEnum.Db);
   }, [pressDb]);
 
   useEffect(() => {
-    pressEffect(pressD, FSchordEnum.D);
+    pressEffect(pressD, TSchordEnum.D);
   }, [pressD]);
 
   useEffect(() => {
-    pressEffect(pressEb, FSchordEnum.Eb);
+    pressEffect(pressEb, TSchordEnum.Eb);
   }, [pressEb]);
 
   useEffect(() => {
-    pressEffect(pressE, FSchordEnum.E);
+    pressEffect(pressE, TSchordEnum.E);
   }, [pressE]);
 
   useEffect(() => {
-    pressEffect(pressF, FSchordEnum.F);
+    pressEffect(pressF, TSchordEnum.F);
   }, [pressF]);
 
   useEffect(() => {
-    pressEffect(pressGb, FSchordEnum.Gb);
+    pressEffect(pressGb, TSchordEnum.Gb);
   }, [pressGb]);
 
   useEffect(() => {
-    pressEffect(pressG, FSchordEnum.G);
+    pressEffect(pressG, TSchordEnum.G);
   }, [pressG]);
 
   useEffect(() => {
-    pressEffect(pressAb, FSchordEnum.Ab);
+    pressEffect(pressAb, TSchordEnum.Ab);
   }, [pressAb]);
 
   useEffect(() => {
-    pressEffect(pressA, FSchordEnum.A);
+    pressEffect(pressA, TSchordEnum.A);
   }, [pressA]);
 
   useEffect(() => {
-    pressEffect(pressBb, FSchordEnum.Bb);
+    pressEffect(pressBb, TSchordEnum.Bb);
   }, [pressBb]);
 
   useEffect(() => {
-    pressEffect(pressB, FSchordEnum.B);
+    pressEffect(pressB, TSchordEnum.B);
   }, [pressB]);
 
   return (

@@ -1,8 +1,8 @@
 import { Howl } from "howler";
-import { FSinstrumentEnum } from "../config/instrumentConfig";
+import { TSinstrumentEnum } from "../config/instrumentConfig";
 const src =
   "/soundfont/MusyngKite/" +
-  (localStorage.getItem("leftInst") || FSinstrumentEnum.acoustic_grand_piano) +
+  (localStorage.getItem("leftInst") || TSinstrumentEnum.acoustic_grand_piano) +
   "-mp3/";
 //Create Sound Model
 export const leftSound: { [key: string]: Howl } = {

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import "../css/Chord.css";
-import { FSchordToKey } from "../config/toKeyConfig";
+import { TSchordToKey } from "../config/toKeyConfig";
 import { Row, Col } from "react-bootstrap";
 import useKeyPress from "../hooks/useKeyPress";
 import {
-  FSvariationEnum,
-  FSchordEnum,
-  FSpatternEnum,
-  FSchordVariationEnum
+  TSvariationEnum,
+  TSchordEnum,
+  TSpatternEnum,
+  TSchordVariationEnum
 } from "../config/chordConfig";
 import { getParallelNote, getAscNote, getDesNote } from "../utils/getNote";
 import ChordSound from "./ChordSound";
@@ -20,70 +20,78 @@ import {
 
 const ChordPlaying = ({
   octave = 4,
-  variation = FSvariationEnum.Major,
-  pattern = FSpatternEnum.parallel
+  variation = TSvariationEnum.Major,
+  pattern = TSpatternEnum.parallel
 }) => {
-  const [chord, setChord] = useState<FSchordEnum>(FSchordEnum.C);
+  const [chord, setChord] = useState<TSchordEnum>(TSchordEnum.C);
   const [chordVariation, setChordVariation] = useState<string>(
-    FSchordVariationEnum.CMajor
+    TSchordVariationEnum.CMajor
   );
 
   const [note, setNote] = useState<string[]>(["C4", "E4", "G4"]);
 
-  const [played, setPlayed] = useState<string[]>([]);
+  const [willStop, setWillStop] = useState<string[]>(["C4", "E4", "G4"]);
   const [playing, setPlaying] = useState<string[]>(["C4", "E4", "G4"]);
   const [order, setOrder] = useState(0);
 
-  const pressC = useKeyPress(FSchordToKey.C);
-  const pressD = useKeyPress(FSchordToKey.D);
-  const pressF = useKeyPress(FSchordToKey.F);
-  const pressG = useKeyPress(FSchordToKey.G);
+  const pressC = useKeyPress(TSchordToKey.C);
+  const pressDb = useKeyPress(TSchordToKey.Db);
+  const pressD = useKeyPress(TSchordToKey.D);
+  const pressEb = useKeyPress(TSchordToKey.Eb);
+  const pressE = useKeyPress(TSchordToKey.E);
+  const pressF = useKeyPress(TSchordToKey.F);
+  const pressGb = useKeyPress(TSchordToKey.Gb);
+  const pressG = useKeyPress(TSchordToKey.G);
+  const pressAb = useKeyPress(TSchordToKey.Ab);
+  const pressA = useKeyPress(TSchordToKey.A);
+  const pressBb = useKeyPress(TSchordToKey.Bb);
+  const pressB = useKeyPress(TSchordToKey.B);
 
-  const chordFirstPressed = (chord: FSchordEnum) => {
+  const chordFirstPressed = (chord: TSchordEnum) => {
     setChord(chord);
     setChordVariation(chord + variation);
-    if (pattern === FSpatternEnum.parallel) {
+    if (pattern === TSpatternEnum.parallel) {
       const gotNote = getParallelNote(chord + variation, octave);
       setNote(gotNote);
       setPlaying(gotNote);
-      setPlayed(gotNote);
-    } else if (pattern === FSpatternEnum.asc) {
+      setWillStop(gotNote);
+    } else if (pattern === TSpatternEnum.asc) {
       const gotNote = getAscNote(chord + variation, octave);
       setNote(gotNote);
       setPlaying([gotNote[0]]);
-      setPlayed([gotNote[0]]);
+      setWillStop([gotNote[0]]);
       setOrder(1);
-    } else if (pattern === FSpatternEnum.des) {
+    } else if (pattern === TSpatternEnum.des) {
       const gotNote = getDesNote(chord + variation, octave);
       setNote(gotNote);
       setPlaying([gotNote[0]]);
-      setPlayed([gotNote[0]]);
+      setWillStop([gotNote[0]]);
       setOrder(1);
     }
   };
 
   const chordRePressed = () => {
     switch (pattern) {
-      case FSpatternEnum.parallel:
+      case TSpatternEnum.parallel:
         setPlaying(note);
-        setPlayed(note);
+        setWillStop(note);
         break;
-      case FSpatternEnum.asc:
+      case TSpatternEnum.asc:
         setPlaying([note[order]]);
-        setPlayed([note[order]]);
+        setWillStop([note[order]]);
         if (order === note.length - 1) setOrder(0);
         else setOrder(order + 1);
         break;
-      case FSpatternEnum.des:
+      case TSpatternEnum.des:
         setPlaying([note[order]]);
-        setPlayed([note[order]]);
+        setWillStop([note[order]]);
         if (order === note.length - 1) setOrder(0);
         else setOrder(order + 1);
         break;
     }
   };
 
-  const chordEffect = (press: boolean, chord: FSchordEnum) => {
+  const chordEffect = (press: boolean, chord: TSchordEnum) => {
     if (press && chordVariation !== chord + variation) {
       chordFirstPressed(chord);
     } else if (press) {
@@ -96,14 +104,14 @@ const ChordPlaying = ({
   useEffect(() => {
     let gotNote: any;
     switch (pattern) {
-      case FSpatternEnum.parallel:
+      case TSpatternEnum.parallel:
         gotNote = getParallelNote(chord + variation, octave);
         break;
-      case FSpatternEnum.asc:
-        gotNote = getAscNote(FSchordEnum.C + variation, octave);
+      case TSpatternEnum.asc:
+        gotNote = getAscNote(chord + variation, octave);
         break;
-      case FSpatternEnum.des:
-        gotNote = getDesNote(FSchordEnum.C + variation, octave);
+      case TSpatternEnum.des:
+        gotNote = getDesNote(chord + variation, octave);
         break;
     }
     setNote(gotNote);
@@ -111,20 +119,41 @@ const ChordPlaying = ({
   }, [pattern]);
 
   useEffect(() => {
-    chordEffect(pressC, FSchordEnum.C);
+    chordEffect(pressC, TSchordEnum.C);
   }, [pressC]);
-
   useEffect(() => {
-    chordEffect(pressD, FSchordEnum.D);
+    chordEffect(pressDb, TSchordEnum.Db);
+  }, [pressDb]);
+  useEffect(() => {
+    chordEffect(pressD, TSchordEnum.D);
   }, [pressD]);
-
   useEffect(() => {
-    chordEffect(pressF, FSchordEnum.F);
+    chordEffect(pressEb, TSchordEnum.Eb);
+  }, [pressEb]);
+  useEffect(() => {
+    chordEffect(pressE, TSchordEnum.E);
+  }, [pressE]);
+  useEffect(() => {
+    chordEffect(pressF, TSchordEnum.F);
   }, [pressF]);
-
   useEffect(() => {
-    chordEffect(pressG, FSchordEnum.G);
+    chordEffect(pressGb, TSchordEnum.Gb);
+  }, [pressGb]);
+  useEffect(() => {
+    chordEffect(pressG, TSchordEnum.G);
   }, [pressG]);
+  useEffect(() => {
+    chordEffect(pressAb, TSchordEnum.Ab);
+  }, [pressAb]);
+  useEffect(() => {
+    chordEffect(pressA, TSchordEnum.A);
+  }, [pressA]);
+  useEffect(() => {
+    chordEffect(pressBb, TSchordEnum.Bb);
+  }, [pressBb]);
+  useEffect(() => {
+    chordEffect(pressB, TSchordEnum.B);
+  }, [pressB]);
 
   return (
     <Row className="mt-4">
@@ -138,14 +167,14 @@ const ChordPlaying = ({
       </Col>
       <Col xs={6}>
         <div className="rightBox">
-          {pattern === FSpatternEnum.parallel && (
+          {pattern === TSpatternEnum.parallel && (
             <FaRegWindowMinimize></FaRegWindowMinimize>
           )}
-          {pattern === FSpatternEnum.asc && <FaChevronUp></FaChevronUp>}
-          {pattern === FSpatternEnum.des && <FaChevronDown></FaChevronDown>}
+          {pattern === TSpatternEnum.asc && <FaChevronUp></FaChevronUp>}
+          {pattern === TSpatternEnum.des && <FaChevronDown></FaChevronDown>}
         </div>
       </Col>
-      <ChordSound played={played} playing={playing}></ChordSound>
+      <ChordSound willStop={willStop} playing={playing}></ChordSound>
     </Row>
   );
 };

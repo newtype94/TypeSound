@@ -2,43 +2,43 @@ import React, { useEffect, useState } from "react";
 
 import "../css/Chord.css";
 import {
-  FSchordToKey,
-  FSvariationTokey,
-  FSpatternTokey
+  TSchordToKey,
+  TSvariationTokey,
+  TSpatternTokey
 } from "../config/toKeyConfig";
 import useKeyPress from "../hooks/useKeyPress";
 import {
-  FSvariationEnum,
-  FSvariationArray,
-  FSpatternEnum
+  TSvariationEnum,
+  TSvariationArray,
+  TSpatternEnum
 } from "../config/chordConfig";
 import ChordPlaying from "./ChordPlaying";
 
 const Chord = () => {
   const [octave, setOctave] = useState(4);
-  const [pattern, setPattern] = useState<FSpatternEnum>(FSpatternEnum.parallel);
-  const [variation, setVariation] = useState<FSvariationEnum>(
-    FSvariationEnum.Major
+  const [pattern, setPattern] = useState<TSpatternEnum>(TSpatternEnum.parallel);
+  const [variation, setVariation] = useState<TSvariationEnum>(
+    TSvariationEnum.Major
   );
 
-  const octaveUp = useKeyPress(FSchordToKey.OctaveUp);
-  const octaveDown = useKeyPress(FSchordToKey.OctaveDown);
-  const patternParallel = useKeyPress(FSpatternTokey.parallel);
-  const patternAsc = useKeyPress(FSpatternTokey.asc);
-  const patternDes = useKeyPress(FSpatternTokey.des);
+  const octaveUp = useKeyPress(TSchordToKey.OctaveUp);
+  const octaveDown = useKeyPress(TSchordToKey.OctaveDown);
+  const patternParallel = useKeyPress(TSpatternTokey.parallel);
+  const patternAsc = useKeyPress(TSpatternTokey.asc);
+  const patternDes = useKeyPress(TSpatternTokey.des);
 
   const variationPressed = [
-    useKeyPress(FSvariationTokey.Major),
-    useKeyPress(FSvariationTokey.m),
-    useKeyPress(FSvariationTokey.msix),
-    useKeyPress(FSvariationTokey.mseven),
-    useKeyPress(FSvariationTokey.aug),
-    useKeyPress(FSvariationTokey.dim),
-    useKeyPress(FSvariationTokey.two),
-    useKeyPress(FSvariationTokey.six),
-    useKeyPress(FSvariationTokey.seven),
-    useKeyPress(FSvariationTokey.sustwo),
-    useKeyPress(FSvariationTokey.susfour)
+    useKeyPress(TSvariationTokey.Major),
+    useKeyPress(TSvariationTokey.m),
+    useKeyPress(TSvariationTokey.msix),
+    useKeyPress(TSvariationTokey.mseven),
+    useKeyPress(TSvariationTokey.aug),
+    useKeyPress(TSvariationTokey.dim),
+    useKeyPress(TSvariationTokey.two),
+    useKeyPress(TSvariationTokey.six),
+    useKeyPress(TSvariationTokey.seven),
+    useKeyPress(TSvariationTokey.sustwo),
+    useKeyPress(TSvariationTokey.susfour)
   ];
 
   useEffect(() => {
@@ -51,18 +51,18 @@ const Chord = () => {
 
   useEffect(() => {
     if (patternParallel) {
-      setPattern(FSpatternEnum.parallel);
+      setPattern(TSpatternEnum.parallel);
     } else if (patternAsc) {
-      setPattern(FSpatternEnum.asc);
+      setPattern(TSpatternEnum.asc);
     } else if (patternDes) {
-      setPattern(FSpatternEnum.des);
+      setPattern(TSpatternEnum.des);
     }
   }, [patternParallel, patternAsc, patternDes]);
 
   useEffect(() => {
     for (let i = 0; i < variationPressed.length; i++) {
       if (variationPressed[i]) {
-        setVariation(FSvariationArray[i]);
+        setVariation(TSvariationArray[i]);
       }
     }
   }, [variationPressed]);

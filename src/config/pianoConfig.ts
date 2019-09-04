@@ -1,4 +1,4 @@
-export enum FSfullKeyEnum {
+export enum TSfullKeyEnum {
   C0 = "C0",
   D0 = "D00",
   E0 = "E0",
