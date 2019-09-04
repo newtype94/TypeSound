@@ -1,18 +1,10 @@
 import React from "react";
 import Piano from "./Piano";
 import Chord from "./Chord";
-import {
-  Container,
-  Col,
-  Row,
-  Form,
-  FormControlProps,
-  Accordion,
-  Card
-} from "react-bootstrap";
+import { Container, Col, Row, Form, FormControlProps } from "react-bootstrap";
 import { TSinstrumentList, TSinstrumentEnum } from "../config/instrumentConfig";
 import { ReplaceProps, BsPrefixProps } from "react-bootstrap/helpers";
-import { FaKeyboard } from "react-icons/fa";
+import GuideBook from "./GuideBook";
 
 const App = () => {
   const instrumentChanged = (
@@ -40,30 +32,7 @@ const App = () => {
           <h1>TypeSound</h1>
         </Col>
       </Row>
-      <Row className="mt-3">
-        <Col xs={12}>
-          <Accordion>
-            <Card bg="warning">
-              <Accordion.Toggle as={Card.Header} eventKey="0">
-                <b>+ Guide Book</b>
-              </Accordion.Toggle>
-              <Accordion.Collapse eventKey="0">
-                <Card.Body>
-                  <h3 style={{ color: "red", float: "left" }}>
-                    <FaKeyboard></FaKeyboard>
-                    Chord Map
-                  </h3>
-                  <h3 style={{ color: "skyblue", float: "right" }}>
-                    <FaKeyboard></FaKeyboard>
-                    Piano Map
-                  </h3>
-                  <img width="100%" src="/guide.jpg"></img>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-          </Accordion>
-        </Col>
-      </Row>
+      <GuideBook></GuideBook>
       <Row className="mt-3">
         <Col xs={12}>
           <Form.Group controlId="Instrument">

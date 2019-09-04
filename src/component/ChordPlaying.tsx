@@ -15,7 +15,9 @@ import ChordSound from "./ChordSound";
 import {
   FaRegWindowMinimize,
   FaChevronDown,
-  FaChevronUp
+  FaChevronUp,
+  FaArrowRight,
+  FaArrowDown
 } from "react-icons/fa";
 
 const ChordPlaying = ({
@@ -148,15 +150,26 @@ const ChordPlaying = ({
           <br />
           {chord}&nbsp;
           {variation}
-        </div>
-      </Col>
-      <Col md={6} xs={12} className="mt-3">
-        <div className="rightBox">
+          <br></br>
           {pattern === TSpatternEnum.parallel && (
             <FaRegWindowMinimize></FaRegWindowMinimize>
           )}
           {pattern === TSpatternEnum.asc && <FaChevronUp></FaChevronUp>}
           {pattern === TSpatternEnum.des && <FaChevronDown></FaChevronDown>}
+          <br></br>
+        </div>
+      </Col>
+      <Col md={6} xs={12} className="mt-3">
+        <div className="rightBox">
+          {note.map(value => {
+            return value + " ";
+          })}
+          <br></br>
+          <FaArrowDown></FaArrowDown>
+          <br></br>
+          {playing.map(value => {
+            return value + " ";
+          })}
         </div>
       </Col>
       <ChordSound playing={playing}></ChordSound>

@@ -5,16 +5,18 @@
   border: 10px solid red;
   border-radius: 10%;
   padding: 20px;
-  height: 210px;
+  height: 250px;
   text-overflow: ellipsis;
+
+  vertical-align: middle;
 }
 
 .rightBox {
   color: green;
-  font-size: 60px;
+  font-size: 30px;
   text-align: center;
   border: 10px solid green;
   border-radius: 10%;
   padding: 20px;
-  height: 210px;
+  height: 250px;
 }
