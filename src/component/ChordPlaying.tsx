@@ -106,6 +106,11 @@ const ChordPlaying = ({
   }, [pattern]);
 
   useEffect(() => {
+    setNote(getNote(chord + variation, octave, pattern));
+    setOrder(0);
+  }, [octave]);
+
+  useEffect(() => {
     chordEffect(pressC, TSchordEnum.C);
   }, [pressC]);
   useEffect(() => {
