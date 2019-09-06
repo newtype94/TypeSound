@@ -452,8 +452,8 @@ export const chordNotes: { [x: string]: TSchordEnum[][] } = {
     []
   ],
   [TSchordVariationEnum.Gsus4]: [
-    [TSchordEnum.G, TSchordEnum.C],
-    [TSchordEnum.D],
+    [TSchordEnum.G],
+    [TSchordEnum.C, TSchordEnum.D],
     []
   ],
 
