@@ -1,13 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import "../css/Piano.css";
 import { TSpianoToKey } from "../config/toKeyConfig";
 import useKeyPress from "../hooks/useKeyPress";
 import { Row, Col } from "react-bootstrap";
 import { TSchordEnum } from "../config/chordConfig";
-import { rightSound } from "../lib/rightSound";
+import { rightSoundMaker } from "../lib/rightSound";
+import { TSinstrumentEnum } from "../config/instrumentConfig";
+import instContext from "../context/instContext";
+
+let rightSound = rightSoundMaker(
+  "/soundfont/MusyngKite/" + TSinstrumentEnum.acoustic_grand_piano + "-mp3/"
+);
 
 const Piano = () => {
+  const { rightInst } = useContext(instContext);
+
+  useEffect(() => {
+    rightSound = rightSoundMaker(
+      "/soundfont/MusyngKite/" + rightInst + "-mp3/"
+    );
+  }, [rightInst]);
+
   const [octave, setOctave] = useState(4);
 
   const octaveUp = useKeyPress(TSpianoToKey.OctaveUp);
@@ -26,90 +40,41 @@ const Piano = () => {
   const pressBb = useKeyPress(TSpianoToKey.Bb);
   const pressB = useKeyPress(TSpianoToKey.B);
 
-  const [C, setC] = useState(false);
-  const [Db, setDb] = useState(false);
-  const [D, setD] = useState(false);
-  const [Eb, setEb] = useState(false);
-  const [E, setE] = useState(false);
-  const [F, setF] = useState(false);
-  const [Gb, setGb] = useState(false);
-  const [G, setG] = useState(false);
-  const [Ab, setAb] = useState(false);
-  const [A, setA] = useState(false);
-  const [Bb, setBb] = useState(false);
-  const [B, setB] = useState(false);
-
   const pressEffect = (press: boolean, chord: TSchordEnum) => {
-    let toStop;
-    if (press) {
-      toStop = rightSound[chord + octave].play();
+    return () => {
+      let toStop;
       const pressed = document.getElementById(chord);
-      pressed!.classList.add("playing");
-    } else {
-      rightSound[chord + (octave - 1)].stop(toStop);
-      rightSound[chord + octave].stop(toStop);
-      rightSound[chord + (octave + 1)].stop(toStop);
-      const pressed = document.getElementById(chord);
-      pressed!.classList.remove("playing");
-    }
+
+      if (press) {
+        toStop = rightSound[chord + octave].play();
+        pressed!.classList.add("playing");
+      } else {
+        rightSound[chord + (octave - 1)].stop(toStop);
+        rightSound[chord + octave].stop(toStop);
+        rightSound[chord + (octave + 1)].stop(toStop);
+        pressed!.classList.remove("playing");
+      }
+    };
   };
 
   useEffect(() => {
-    if (octaveUp && octave < 7) {
-      setOctave(octave + 1);
-    }
-    if (octaveDown && octave > 1) {
-      setOctave(octave - 1);
-    }
+    if (octaveUp && octave < 7) setOctave(octave + 1);
+    else if (octaveDown && octave > 1) setOctave(octave - 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [octaveUp, octaveDown]);
 
-  useEffect(() => {
-    pressEffect(pressC || C, TSchordEnum.C);
-  }, [pressC, C]);
-
-  useEffect(() => {
-    pressEffect(pressDb || Db, TSchordEnum.Db);
-  }, [pressDb, Db]);
-
-  useEffect(() => {
-    pressEffect(pressD || D, TSchordEnum.D);
-  }, [pressD, D]);
-
-  useEffect(() => {
-    pressEffect(pressEb || Eb, TSchordEnum.Eb);
-  }, [pressEb, Eb]);
-
-  useEffect(() => {
-    pressEffect(pressE || E, TSchordEnum.E);
-  }, [pressE, E]);
-
-  useEffect(() => {
-    pressEffect(pressF || F, TSchordEnum.F);
-  }, [pressF, F]);
-
-  useEffect(() => {
-    pressEffect(pressGb || Gb, TSchordEnum.Gb);
-  }, [pressGb, Gb]);
-
-  useEffect(() => {
-    pressEffect(pressG || G, TSchordEnum.G);
-  }, [pressG, G]);
-
-  useEffect(() => {
-    pressEffect(pressAb || Ab, TSchordEnum.Ab);
-  }, [pressAb, Ab]);
-
-  useEffect(() => {
-    pressEffect(pressA || A, TSchordEnum.A);
-  }, [pressA, A]);
-
-  useEffect(() => {
-    pressEffect(pressBb || Bb, TSchordEnum.Bb);
-  }, [pressBb, Bb]);
-
-  useEffect(() => {
-    pressEffect(pressB || B, TSchordEnum.B);
-  }, [pressB, B]);
+  useEffect(pressEffect(pressC, TSchordEnum.C), [pressC]);
+  useEffect(pressEffect(pressDb, TSchordEnum.Db), [pressDb]);
+  useEffect(pressEffect(pressD, TSchordEnum.D), [pressD]);
+  useEffect(pressEffect(pressEb, TSchordEnum.Eb), [pressEb]);
+  useEffect(pressEffect(pressE, TSchordEnum.E), [pressE]);
+  useEffect(pressEffect(pressF, TSchordEnum.F), [pressF]);
+  useEffect(pressEffect(pressGb, TSchordEnum.Gb), [pressGb]);
+  useEffect(pressEffect(pressG, TSchordEnum.G), [pressG]);
+  useEffect(pressEffect(pressAb, TSchordEnum.Ab), [pressAb]);
+  useEffect(pressEffect(pressA, TSchordEnum.A), [pressA]);
+  useEffect(pressEffect(pressBb, TSchordEnum.Bb), [pressBb]);
+  useEffect(pressEffect(pressB, TSchordEnum.B), [pressB]);
 
   return (
     <Row className="mt-2">
@@ -118,92 +83,18 @@ const Piano = () => {
       </Col>
       <Col xs={12}>
         <div className="keys">
-          <div
-            className="key"
-            id="C"
-            onMouseDownCapture={() => setC(true)}
-            onMouseUp={() => setC(false)}
-            onMouseOut={() => setC(false)}
-          ></div>
-          <div
-            className="key sharp"
-            id="Db"
-            onMouseDownCapture={() => setDb(true)}
-            onMouseUp={() => setDb(false)}
-            onMouseOut={() => setDb(false)}
-          ></div>
-          <div
-            className="key"
-            id="D"
-            onMouseDownCapture={() => setD(true)}
-            onMouseUp={() => setD(false)}
-            onMouseOut={() => setD(false)}
-          ></div>
-          <div
-            className="key sharp"
-            id="Eb"
-            onMouseDownCapture={() => setEb(true)}
-            onMouseUp={() => setEb(false)}
-            onMouseOut={() => setEb(false)}
-          ></div>
-          <div
-            className="key"
-            id="E"
-            onMouseDownCapture={() => setE(true)}
-            onMouseUp={() => setE(false)}
-            onMouseOut={() => setE(false)}
-          ></div>
-          <div
-            className="key"
-            id="F"
-            onMouseDownCapture={() => setF(true)}
-            onMouseUp={() => setF(false)}
-            onMouseOut={() => setF(false)}
-          ></div>
-          <div
-            className="key sharp"
-            id="Gb"
-            onMouseDownCapture={() => setGb(true)}
-            onMouseUp={() => setGb(false)}
-            onMouseOut={() => setGb(false)}
-          ></div>
-          <div
-            className="key"
-            id="G"
-            onMouseDownCapture={() => setG(true)}
-            onMouseUp={() => setG(false)}
-            onMouseOut={() => setG(false)}
-          ></div>
-          <div
-            className="key sharp"
-            id="Ab"
-            onMouseDownCapture={() => setAb(true)}
-            onMouseUp={() => setAb(false)}
-            onMouseOut={() => setAb(false)}
-          ></div>
-          <div
-            className="key"
-            id="A"
-            onMouseDownCapture={() => setA(true)}
-            onMouseUp={() => setA(false)}
-            onMouseOut={() => setA(false)}
-          ></div>
-          <div
-            className="key sharp"
-            id="Bb"
-            onMouseDownCapture={() => setBb(true)}
-            onMouseUp={() => setBb(false)}
-            onMouseOut={() => setBb(false)}
-          ></div>
-          <div
-            className="key"
-            id="B"
-            onMouseDownCapture={() => {
-              setB(true);
-            }}
-            onMouseUp={() => setB(false)}
-            onMouseOut={() => setB(false)}
-          ></div>
+          <div className="key" id="C"></div>
+          <div className="key sharp" id="Db"></div>
+          <div className="key" id="D"></div>
+          <div className="key sharp" id="Eb"></div>
+          <div className="key" id="E"></div>
+          <div className="key" id="F"></div>
+          <div className="key sharp" id="Gb"></div>
+          <div className="key" id="G"></div>
+          <div className="key sharp" id="Ab"></div>
+          <div className="key" id="A"></div>
+          <div className="key sharp" id="Bb"></div>
+          <div className="key" id="B"></div>
         </div>
       </Col>
     </Row>

@@ -1,24 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { leftSound } from "../lib/leftSound";
+import React, { useEffect, useContext } from "react";
+import { leftSoundMaker } from "../lib/leftSound";
+import { TSinstrumentEnum } from "../config/instrumentConfig";
+import instContext from "../context/instContext";
+
+let leftSound = leftSoundMaker(
+  "/soundfont/MusyngKite/" + TSinstrumentEnum.acoustic_grand_piano + "-mp3/"
+);
 
 const ChordSound = ({ playing = [""] }) => {
-  const [willStop, setWillStop] = useState<{ chord: string; id: number }[]>([]);
+  let willStop: { chord: string; id: number }[] = [];
+
+  const { leftInst } = useContext(instContext);
+
+  useEffect(() => {
+    leftSound = leftSoundMaker("/soundfont/MusyngKite/" + leftInst + "-mp3/");
+  }, [leftInst]);
+
   useEffect(() => {
     if (playing.length === 0) {
-      willStop.forEach(value => {
-        leftSound[value.chord].stop(value.id);
+      willStop.forEach((v) => {
+        leftSound[v.chord].stop(v.id);
       });
-      setWillStop([]);
+      willStop = [];
     } else {
-      willStop.forEach(value => {
-        leftSound[value.chord].stop(value.id);
+      willStop.forEach((v) => {
+        leftSound[v.chord].stop(v.id);
       });
       const tempStop: { chord: string; id: number }[] = [];
-      playing.forEach(value => {
-        const soundId = leftSound[value].play();
-        tempStop.push({ chord: value, id: soundId });
+      playing.forEach((v) => {
+        const soundId = leftSound[v].play();
+        tempStop.push({ chord: v, id: soundId });
       });
-      setWillStop(tempStop);
+      willStop = tempStop;
     }
   }, [playing]);
 

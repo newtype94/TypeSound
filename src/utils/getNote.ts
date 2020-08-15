@@ -7,13 +7,13 @@ export const getNote = (
   pattern: TSpatternEnum
 ): string[] => {
   let notesTemp: string[] = [];
-  chordNotes[chordVariatioin][0].map(value => {
+  chordNotes[chordVariatioin][0].forEach(value => {
     notesTemp.push(value + String(octave));
   });
-  chordNotes[chordVariatioin][1].map(value => {
+  chordNotes[chordVariatioin][1].forEach(value => {
     notesTemp.push(value + String(octave + 1));
   });
-  chordNotes[chordVariatioin][2].map(value => {
+  chordNotes[chordVariatioin][2].forEach(value => {
     notesTemp.push(value + String(octave + 2));
   });
   let notesResult = [""];

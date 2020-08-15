@@ -4,13 +4,13 @@ import "../css/Chord.css";
 import {
   TSchordToKey,
   TSvariationTokey,
-  TSpatternTokey
+  TSpatternTokey,
 } from "../config/toKeyConfig";
 import useKeyPress from "../hooks/useKeyPress";
 import {
   TSvariationEnum,
   TSvariationArray,
-  TSpatternEnum
+  TSpatternEnum,
 } from "../config/chordConfig";
 import ChordPlaying from "./ChordPlaying";
 
@@ -38,7 +38,7 @@ const Chord = () => {
     useKeyPress(TSvariationTokey.six),
     useKeyPress(TSvariationTokey.seven),
     useKeyPress(TSvariationTokey.sustwo),
-    useKeyPress(TSvariationTokey.susfour)
+    useKeyPress(TSvariationTokey.susfour),
   ];
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const Chord = () => {
   }, [patternParallel, patternAsc, patternDes]);
 
   useEffect(() => {
-    for (let i = 0; i < variationPressed.length; i++) {
+    for (let i in variationPressed) {
       if (variationPressed[i]) {
         setVariation(TSvariationArray[i]);
       }

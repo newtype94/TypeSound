@@ -8,7 +8,7 @@ import {
   TSvariationEnum,
   TSchordEnum,
   TSpatternEnum,
-  TSchordVariationEnum
+  TSchordVariationEnum,
 } from "../config/chordConfig";
 import { getNote } from "../utils/getNote";
 import ChordSound from "./ChordSound";
@@ -16,14 +16,13 @@ import {
   FaRegWindowMinimize,
   FaChevronDown,
   FaChevronUp,
-  FaArrowRight,
-  FaArrowDown
+  FaArrowDown,
 } from "react-icons/fa";
 
 const ChordPlaying = ({
   octave = 4,
   variation = TSvariationEnum.Major,
-  pattern = TSpatternEnum.parallel
+  pattern = TSpatternEnum.parallel,
 }) => {
   const [chord, setChord] = useState<TSchordEnum>(TSchordEnum.C);
   const [chordVariation, setChordVariation] = useState<string>(
@@ -91,61 +90,31 @@ const ChordPlaying = ({
   };
 
   const chordEffect = (press: boolean, chord: TSchordEnum) => {
-    if (press && chordVariation !== chord + variation) {
-      chordFirstPressed(chord);
-    } else if (press) {
-      chordRePressed();
-    } else if (!press) {
-      setPlaying([]);
-    }
+    return () => {
+      if (press && chordVariation !== chord + variation)
+        chordFirstPressed(chord);
+      else if (press) chordRePressed();
+      else if (!press) setPlaying([]);
+    };
   };
 
   useEffect(() => {
     setNote(getNote(chord + variation, octave, pattern));
     setOrder(0);
-  }, [pattern]);
+  }, [pattern, octave]);
 
-  useEffect(() => {
-    setNote(getNote(chord + variation, octave, pattern));
-    setOrder(0);
-  }, [octave]);
-
-  useEffect(() => {
-    chordEffect(pressC, TSchordEnum.C);
-  }, [pressC]);
-  useEffect(() => {
-    chordEffect(pressDb, TSchordEnum.Db);
-  }, [pressDb]);
-  useEffect(() => {
-    chordEffect(pressD, TSchordEnum.D);
-  }, [pressD]);
-  useEffect(() => {
-    chordEffect(pressEb, TSchordEnum.Eb);
-  }, [pressEb]);
-  useEffect(() => {
-    chordEffect(pressE, TSchordEnum.E);
-  }, [pressE]);
-  useEffect(() => {
-    chordEffect(pressF, TSchordEnum.F);
-  }, [pressF]);
-  useEffect(() => {
-    chordEffect(pressGb, TSchordEnum.Gb);
-  }, [pressGb]);
-  useEffect(() => {
-    chordEffect(pressG, TSchordEnum.G);
-  }, [pressG]);
-  useEffect(() => {
-    chordEffect(pressAb, TSchordEnum.Ab);
-  }, [pressAb]);
-  useEffect(() => {
-    chordEffect(pressA, TSchordEnum.A);
-  }, [pressA]);
-  useEffect(() => {
-    chordEffect(pressBb, TSchordEnum.Bb);
-  }, [pressBb]);
-  useEffect(() => {
-    chordEffect(pressB, TSchordEnum.B);
-  }, [pressB]);
+  useEffect(chordEffect(pressC, TSchordEnum.C), [pressC]);
+  useEffect(chordEffect(pressDb, TSchordEnum.Db), [pressDb]);
+  useEffect(chordEffect(pressD, TSchordEnum.D), [pressD]);
+  useEffect(chordEffect(pressEb, TSchordEnum.Eb), [pressEb]);
+  useEffect(chordEffect(pressE, TSchordEnum.E), [pressE]);
+  useEffect(chordEffect(pressF, TSchordEnum.F), [pressF]);
+  useEffect(chordEffect(pressGb, TSchordEnum.Gb), [pressGb]);
+  useEffect(chordEffect(pressG, TSchordEnum.G), [pressG]);
+  useEffect(chordEffect(pressAb, TSchordEnum.Ab), [pressAb]);
+  useEffect(chordEffect(pressA, TSchordEnum.A), [pressA]);
+  useEffect(chordEffect(pressBb, TSchordEnum.Bb), [pressBb]);
+  useEffect(chordEffect(pressB, TSchordEnum.B), [pressB]);
 
   return (
     <Row>
@@ -155,24 +124,24 @@ const ChordPlaying = ({
           <br />
           {chord}&nbsp;
           {variation}
-          <br></br>
+          <br />
           {pattern === TSpatternEnum.parallel && (
             <FaRegWindowMinimize></FaRegWindowMinimize>
           )}
           {pattern === TSpatternEnum.asc && <FaChevronUp></FaChevronUp>}
           {pattern === TSpatternEnum.des && <FaChevronDown></FaChevronDown>}
-          <br></br>
+          <br />
         </div>
       </Col>
       <Col md={6} xs={12} className="mt-3">
         <div className="rightBox">
-          {note.map(value => {
+          {note.map((value) => {
             return value + " ";
           })}
-          <br></br>
+          <br />
           <FaArrowDown></FaArrowDown>
-          <br></br>
-          {playing.map(value => {
+          <br />
+          {playing.map((value) => {
             return value + " ";
           })}
         </div>

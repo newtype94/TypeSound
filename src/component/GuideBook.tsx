@@ -5,7 +5,7 @@ import {
   FaKeyboard,
   FaRegWindowMinimize,
   FaChevronUp,
-  FaChevronDown
+  FaChevronDown,
 } from "react-icons/fa";
 
 const GuideBook = () => {
@@ -19,15 +19,15 @@ const GuideBook = () => {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
-                <h6>-You may use Chrome( IE XXX )</h6>
+                <h6>-Chrome Recommended</h6>
                 <h6>
-                  -Keyboard is necessary. On mobile, use Bluetooth keyboard
+                  -Keyboard is necessary. On mobile, Use Bluetooth keyboard
                 </h6>
                 <h6>
                   -There are 3 chord patterns (&nbsp;
-                  <FaRegWindowMinimize></FaRegWindowMinimize>
-                  <FaChevronUp></FaChevronUp>
-                  <FaChevronDown></FaChevronDown>) about playing
+                  <FaRegWindowMinimize />
+                  <FaChevronUp />
+                  <FaChevronDown />) about playing
                 </h6>
                 <h6>-While pressing chord key, chord plays itself</h6>
                 <h6>
@@ -42,7 +42,7 @@ const GuideBook = () => {
                   <FaKeyboard></FaKeyboard>
                   Piano Map
                 </h3>
-                <img width="100%" src="/guide.jpg"></img>
+                <img width="100%" src="/guide.jpg" alt="guide" />
               </Card.Body>
             </Accordion.Collapse>
           </Card>
