@@ -1,5 +1,5 @@
 # 포트폴리오
-[포트폴리오 바로 가기](https://newtype94.github.io/2020/01/13//typesound/)
+[포트폴리오 바로 가기](https://newtype94.github.io/2020/01/13/포트폴리오/typesound/)
 
 # Typesound
 - ReactJS + Typescript로 제작한 웹 피아노
